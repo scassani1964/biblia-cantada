@@ -299,7 +299,7 @@
         // Configuration
         const GITHUB_BASE_URL = 'https://archive.org/download/19-salmos/';
 
-        // Bible books structure
+        // Bible books structure - ONLY files that actually exist on Archive.org
         const bibleBooks = {
             oldTestament: [
                 { number: 1, name: 'Gênesis', available: false },
@@ -320,9 +320,9 @@
                 { number: 16, name: 'Neemias', available: false },
                 { number: 17, name: 'Ester', available: false },
                 { number: 18, name: 'Jó', available: false },
-                { number: 19, name: 'Salmos', available: true, filename: '19_SALMOS_.mp3' },
+                { number: 19, name: 'Salmos', available: true, filename: '19_SALMOS%20.mp3' },
                 { number: 20, name: 'Provérbios', available: false },
-                { number: 21, name: 'Eclesiastes', available: true, filename: '21_Eclesiastes.mp3' },
+                { number: 21, name: 'Eclesiastes', available: false },
                 { number: 22, name: 'Cantares', available: false },
                 { number: 23, name: 'Isaías', available: false },
                 { number: 24, name: 'Jeremias', available: false },
@@ -343,27 +343,26 @@
                 { number: 39, name: 'Malaquias', available: false }
             ],
             newTestament: [
-                { number: 40, name: 'Mateus Parte1', available: true, filename: '40_Mateus_Parte1.mp3' },
-                { number: 40, name: 'Mateus Parte2', available: true, filename: '40_Mateus_Parte2.mp3' },
-                { number: 41, name: 'Marcos Parte1', available: true, filename: '41_Marcos_Parte1.mp3' },
-                { number: 42, name: 'Lucas Parte2', available: true, filename: '42_Lucas_Parte2.mp3' },
-                { number: 43, name: 'João', available: true, filename: '43_João.mp3' },
-                { number: 43, name: 'João Parte1', available: true, filename: '43_João_Parte1.mp3' },
-                { number: 43, name: 'João Parte2', available: true, filename: '43_João_Parte2.mp3' },
+                { number: 40, name: 'Mateus', available: false },
+                { number: 41, name: 'Marcos', available: false },
+                { number: 42, name: 'Lucas', available: false },
+                { number: 43, name: 'João', available: true, filename: '43_%20Jo%C3%A3o.mp3' },
+                { number: 43, name: 'João Parte 1', available: true, filename: '43_Jo%C3%A3o_Parte1.mp3' },
+                { number: 43, name: 'João Parte 2', available: true, filename: '43_Jo%C3%A3o_Parte2.mp3' },
                 { number: 44, name: 'Atos', available: false },
                 { number: 45, name: 'Romanos', available: true, filename: '45_Romanos.mp3' },
-                { number: 46, name: '1 Coríntios', available: true, filename: '46_1 Corintios_.mp3' },
-                { number: 47, name: '2 Coríntios', available: true, filename: '47_2 Corintios_.mp3' },
+                { number: 46, name: '1 Coríntios', available: true, filename: '46_1%20Cor%C3%ADntios%20.mp3' },
+                { number: 47, name: '2 Coríntios', available: true, filename: '47_2%20Cor%C3%ADntios%20.mp3' },
                 { number: 48, name: 'Gálatas', available: false },
-                { number: 49, name: 'Efésios', available: true, filename: '49_Efésios.mp3' },
+                { number: 49, name: 'Efésios', available: true, filename: '49_Ef%C3%A9sios.mp3' },
                 { number: 50, name: 'Filipenses', available: true, filename: '50_Filipenses.mp3' },
-                { number: 50, name: 'Carta aos Filipenses', available: true, filename: '50_Carta aos Filipenses_.mp3' },
+                { number: 50, name: 'Carta aos Filipenses', available: true, filename: '50_Carta%20aos%20Filipenses%20.mp3' },
                 { number: 51, name: 'Colossenses', available: true, filename: '51_Colossenses.mp3' },
-                { number: 51, name: 'Carta aos Colossenses', available: true, filename: '51_Carta aos Colossenses_.mp3' },
+                { number: 51, name: 'Carta aos Colossenses', available: true, filename: '51_Carta%20aos%20Colossenses%20.mp3' },
                 { number: 52, name: '1 Tessalonicenses', available: true, filename: '52_1Tessalonicenses.mp3' },
                 { number: 53, name: '2 Tessalonicenses', available: true, filename: '53_2Tessalonicenses.mp3' },
-                { number: 54, name: '1 Timóteo', available: true, filename: '54_1Timóteo.mp3' },
-                { number: 55, name: '2 Timóteo', available: true, filename: '55_2Timóteo.mp3' },
+                { number: 54, name: '1 Timóteo', available: true, filename: '54_1Tim%C3%B3teo.mp3' },
+                { number: 55, name: '2 Timóteo', available: true, filename: '55_2Tim%C3%B3teo.mp3' },
                 { number: 56, name: 'Tito', available: false },
                 { number: 57, name: 'Filemom', available: false },
                 { number: 58, name: 'Hebreus', available: true, filename: '58_Hebreus.mp3' },
@@ -371,8 +370,8 @@
                 { number: 60, name: '1 Pedro', available: true, filename: '60_1Pedro.mp3' },
                 { number: 61, name: '2 Pedro', available: true, filename: '61_2Pedro.mp3' },
                 { number: 62, name: '1 João', available: false },
-                { number: 63, name: '2 João', available: true, filename: '63_2João.mp3' },
-                { number: 64, name: '3 João', available: true, filename: '64_3João.mp3' },
+                { number: 63, name: '2 João', available: true, filename: '63_2Jo%C3%A3o.mp3' },
+                { number: 64, name: '3 João', available: true, filename: '64_3Jo%C3%A3o.mp3' },
                 { number: 65, name: 'Judas', available: true, filename: '65_Judas.mp3' },
                 { number: 66, name: 'Apocalipse', available: false }
             ]
