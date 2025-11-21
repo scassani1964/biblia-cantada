@@ -447,4 +447,44 @@
                 const option = document.createElement('div');
                 option.className = 'file-option';
                 option.innerHTML = `<div class="file-option-name">${file.name}</div>`;
-                option.
+                option.onclick = () => {
+                    playFile(book.n, book.name, file);
+                    closeModal();
+                };
+                modalFiles.appendChild(option);
+            });
+            
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+        }
+        
+        function playFile(bookNumber, bookName, file) {
+            const player = document.getElementById('audio-player');
+            const playerContainer = document.getElementById('player-container');
+            const playerTitle = document.getElementById('player-title');
+            
+            const fileUrl = ARCHIVE_BASE_URL + encodeURIComponent(file.file);
+            
+            playerTitle.textContent = `${bookNumber}. ${file.name}`;
+            player.src = fileUrl;
+            playerContainer.classList.add('active');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function closePlayer() {
+            const player = document.getElementById('audio-player');
+            const playerContainer = document.getElementById('player-container');
+            
+            player.pause();
+            player.src = '';
+            playerContainer.classList.remove('active');
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderBooks);
+    </script>
+</body>
+</html>
