@@ -241,3 +241,240 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); padding: 20px 20px 100px 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.header { background: white; padding: 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+h1 { color: #764ba2; font-size: 2.5em; margin: 0; }
+.subtitle { color: #666; margin: 10px 0; }
+.stats { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.stat-box { background: #667eea; color: white; padding: 15px 25px; border-radius: 10px; }
+.section { background: white; padding: 30px; border-radius: 20px; margin-bottom: 30px; }
+.section h2 { color: #764ba2; margin-bottom: 20px; }
+.books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.book-card { padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+.book-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.book-card.available { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+.book-card.not-available { background: #f0f0f0; opacity: 0.6; cursor: default; }
+.book-card.not-available:hover { transform: none; box-shadow: none; }
+.book-number { font-size: 1.5em; font-weight: bold; color: #667eea; }
+.book-name { font-size: 0.9em; margin-top: 5px; color: #333; }
+.player-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; padding: 20px; overflow-y: auto; }
+.player-content { background: white; max-width: 800px; margin: 50px auto; padding: 30px; border-radius: 20px; position: relative; }
+.close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #666; }
+.close-btn:hover { color: #000; }
+.player-title { color: #764ba2; margin-bottom: 20px; }
+.audio-item { margin: 20px 0; padding: 15px; background: #f8f8f8; border-radius: 10px; }
+.audio-label { font-weight: bold; margin-bottom: 10px; color: #333; }
+audio { width: 100%; }
+.new-badge { background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.7em; margin-left: 5px; }
+.footer { background: white; padding: 30px; border-radius: 20px; text-align: center; margin-top: 50px; }
+.footer a { color: #667eea; text-decoration: none; margin: 0 15px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>Bíblia Cantada</h1>
+<p class="subtitle">A Palavra de Deus em Áudio</p>
+<p style="color: #999; margin-top: 5px;">Clique em um livro para ouvir</p>
+<div class="stats">
+<div class="stat-box"><div style="font-size: 2em; font-weight: bold;">46</div><div>Arquivos MP3</div></div>
+<div class="stat-box"><div style="font-size: 2em; font-weight: bold;">66</div><div>Livros Bíblicos</div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>Antigo Testamento (39 livros)</h2>
+<div class="books-grid">
+<div class="book-card available" onclick="openPlayer('01', 'Gênesis')"><div class="book-number">01</div><div class="book-name">Gênesis</div></div>
+<div class="book-card not-available"><div class="book-number">02</div><div class="book-name">Êxodo</div></div>
+<div class="book-card not-available"><div class="book-number">03</div><div class="book-name">Levítico</div></div>
+<div class="book-card not-available"><div class="book-number">04</div><div class="book-name">Números</div></div>
+<div class="book-card not-available"><div class="book-number">05</div><div class="book-name">Deuteronômio</div></div>
+<div class="book-card not-available"><div class="book-number">06</div><div class="book-name">Josué</div></div>
+<div class="book-card not-available"><div class="book-number">07</div><div class="book-name">Juízes</div></div>
+<div class="book-card not-available"><div class="book-number">08</div><div class="book-name">Rute</div></div>
+<div class="book-card not-available"><div class="book-number">09</div><div class="book-name">1 Samuel</div></div>
+<div class="book-card not-available"><div class="book-number">10</div><div class="book-name">2 Samuel</div></div>
+<div class="book-card not-available"><div class="book-number">11</div><div class="book-name">1 Reis</div></div>
+<div class="book-card not-available"><div class="book-number">12</div><div class="book-name">2 Reis</div></div>
+<div class="book-card not-available"><div class="book-number">13</div><div class="book-name">1 Crônicas</div></div>
+<div class="book-card not-available"><div class="book-number">14</div><div class="book-name">2 Crônicas</div></div>
+<div class="book-card not-available"><div class="book-number">15</div><div class="book-name">Esdras</div></div>
+<div class="book-card not-available"><div class="book-number">16</div><div class="book-name">Neemias</div></div>
+<div class="book-card not-available"><div class="book-number">17</div><div class="book-name">Ester</div></div>
+<div class="book-card available" onclick="openPlayer('18', 'Jó')"><div class="book-number">18</div><div class="book-name">Jó</div></div>
+<div class="book-card available" onclick="openPlayer('19', 'Salmos')"><div class="book-number">19</div><div class="book-name">Salmos</div></div>
+<div class="book-card available" onclick="openPlayer('20', 'Provérbios')"><div class="book-number">20</div><div class="book-name">Provérbios</div></div>
+<div class="book-card available" onclick="openPlayer('21', 'Eclesiastes')"><div class="book-number">21</div><div class="book-name">Eclesiastes</div></div>
+<div class="book-card not-available"><div class="book-number">22</div><div class="book-name">Cânticos</div></div>
+<div class="book-card not-available"><div class="book-number">23</div><div class="book-name">Isaías</div></div>
+<div class="book-card not-available"><div class="book-number">24</div><div class="book-name">Jeremias</div></div>
+<div class="book-card not-available"><div class="book-number">25</div><div class="book-name">Lamentações</div></div>
+<div class="book-card not-available"><div class="book-number">26</div><div class="book-name">Ezequiel</div></div>
+<div class="book-card not-available"><div class="book-number">27</div><div class="book-name">Daniel</div></div>
+<div class="book-card not-available"><div class="book-number">28</div><div class="book-name">Oséias</div></div>
+<div class="book-card not-available"><div class="book-number">29</div><div class="book-name">Joel</div></div>
+<div class="book-card not-available"><div class="book-number">30</div><div class="book-name">Amós</div></div>
+<div class="book-card not-available"><div class="book-number">31</div><div class="book-name">Obadias</div></div>
+<div class="book-card not-available"><div class="book-number">32</div><div class="book-name">Jonas</div></div>
+<div class="book-card not-available"><div class="book-number">33</div><div class="book-name">Miquéias</div></div>
+<div class="book-card not-available"><div class="book-number">34</div><div class="book-name">Naum</div></div>
+<div class="book-card not-available"><div class="book-number">35</div><div class="book-name">Habacuque</div></div>
+<div class="book-card not-available"><div class="book-number">36</div><div class="book-name">Sofonias</div></div>
+<div class="book-card not-available"><div class="book-number">37</div><div class="book-name">Ageu</div></div>
+<div class="book-card not-available"><div class="book-number">38</div><div class="book-name">Zacarias</div></div>
+<div class="book-card not-available"><div class="book-number">39</div><div class="book-name">Malaquias</div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>Novo Testamento (27 livros)</h2>
+<div class="books-grid">
+<div class="book-card available" onclick="openPlayer('40', 'Mateus')"><div class="book-number">40</div><div class="book-name">Mateus</div></div>
+<div class="book-card available" onclick="openPlayer('41', 'Marcos')"><div class="book-number">41</div><div class="book-name">Marcos</div></div>
+<div class="book-card available" onclick="openPlayer('42', 'Lucas')"><div class="book-number">42</div><div class="book-name">Lucas</div></div>
+<div class="book-card available" onclick="openPlayer('43', 'João')"><div class="book-number">43</div><div class="book-name">João</div></div>
+<div class="book-card available" onclick="openPlayer('44', 'Atos')"><div class="book-number">44</div><div class="book-name">Atos<span class="new-badge">NOVO</span></div></div>
+<div class="book-card available" onclick="openPlayer('45', 'Romanos')"><div class="book-number">45</div><div class="book-name">Romanos</div></div>
+<div class="book-card available" onclick="openPlayer('46', '1 Coríntios')"><div class="book-number">46</div><div class="book-name">1 Coríntios</div></div>
+<div class="book-card available" onclick="openPlayer('47', '2 Coríntios')"><div class="book-number">47</div><div class="book-name">2 Coríntios</div></div>
+<div class="book-card available" onclick="openPlayer('48', 'Gálatas')"><div class="book-number">48</div><div class="book-name">Gálatas</div></div>
+<div class="book-card available" onclick="openPlayer('49', 'Efésios')"><div class="book-number">49</div><div class="book-name">Efésios</div></div>
+<div class="book-card available" onclick="openPlayer('50', 'Filipenses')"><div class="book-number">50</div><div class="book-name">Filipenses</div></div>
+<div class="book-card available" onclick="openPlayer('51', 'Colossenses')"><div class="book-number">51</div><div class="book-name">Colossenses</div></div>
+<div class="book-card available" onclick="openPlayer('52', '1 Tessalonicenses')"><div class="book-number">52</div><div class="book-name">1 Tessalonicenses</div></div>
+<div class="book-card available" onclick="openPlayer('53', '2 Tessalonicenses')"><div class="book-number">53</div><div class="book-name">2 Tessalonicenses</div></div>
+<div class="book-card available" onclick="openPlayer('54', '1 Timóteo')"><div class="book-number">54</div><div class="book-name">1 Timóteo</div></div>
+<div class="book-card available" onclick="openPlayer('55', '2 Timóteo')"><div class="book-number">55</div><div class="book-name">2 Timóteo</div></div>
+<div class="book-card available" onclick="openPlayer('56', 'Tito')"><div class="book-number">56</div><div class="book-name">Tito</div></div>
+<div class="book-card available" onclick="openPlayer('57', 'Filemom')"><div class="book-number">57</div><div class="book-name">Filemom</div></div>
+<div class="book-card available" onclick="openPlayer('58', 'Hebreus')"><div class="book-number">58</div><div class="book-name">Hebreus</div></div>
+<div class="book-card available" onclick="openPlayer('59', 'Tiago')"><div class="book-number">59</div><div class="book-name">Tiago</div></div>
+<div class="book-card available" onclick="openPlayer('60', '1 Pedro')"><div class="book-number">60</div><div class="book-name">1 Pedro</div></div>
+<div class="book-card available" onclick="openPlayer('61', '2 Pedro')"><div class="book-number">61</div><div class="book-name">2 Pedro</div></div>
+<div class="book-card available" onclick="openPlayer('62', '1 João')"><div class="book-number">62</div><div class="book-name">1 João</div></div>
+<div class="book-card available" onclick="openPlayer('63', '2 João')"><div class="book-number">63</div><div class="book-name">2 João</div></div>
+<div class="book-card available" onclick="openPlayer('64', '3 João')"><div class="book-number">64</div><div class="book-name">3 João</div></div>
+<div class="book-card available" onclick="openPlayer('65', 'Judas')"><div class="book-number">65</div><div class="book-name">Judas</div></div>
+<div class="book-card available" onclick="openPlayer('66', 'Apocalipse')"><div class="book-number">66</div><div class="book-name">Apocalipse</div></div>
+</div>
+</div>
+
+<div class="footer">
+<p><strong>Links Úteis:</strong></p>
+<a href="https://archive.org/details/biblia-cantada-audio-portugues" target="_blank">Archive.org (46 MP3)</a> |
+<a href="https://youtube.com/playlist?list=PLZNgjVVcwVc7n5HbCrdM1Vk5A41Iq42Hf" target="_blank">YouTube</a> |
+<a href="https://github.com/scassani1964/biblia-cantada" target="_blank">GitHub</a>
+<p style="margin-top: 20px;">© 2025 Bíblia Cantada - Stéphane Cassani</p>
+</div>
+</div>
+
+<!-- Modal Player -->
+<div id="playerModal" class="player-modal">
+<div class="player-content">
+<span class="close-btn" onclick="closePlayer()">&times;</span>
+<h2 class="player-title" id="playerTitle"></h2>
+<div id="audioContainer"></div>
+</div>
+</div>
+
+<script>
+const baseUrl = 'https://archive.org/download/biblia-cantada-audio-portugues';
+const mp3Files = {
+    "01": ["01_Genesis.mp3"],
+    "18": ["18_Jo.mp3"],
+    "19": ["19_Salmos_1h07.mp3", "19_Salmos_Adoracao.mp3", "19_Salmos_Paz.mp3"],
+    "20": ["20_Proverbios.mp3"],
+    "21": ["21_Eclesiastes.mp3"],
+    "40": ["40_Mateus_Parte2.mp3"],
+    "41": ["41_Marcos_Parte1.mp3"],
+    "42": ["42_Lucas_Parte2.mp3"],
+    "43": ["43_Joao_Parte1.mp3", "43_Joao_Parte2.mp3"],
+    "44": ["44_Atos_Parte1.mp3", "44_Atos_Parte2.mp3", "44_Atos_Parte3.mp3"],
+    "45": ["45_Romanos.mp3", "45_Romanos_Musicas.mp3"],
+    "46": ["46_1Corintios.mp3"],
+    "47": ["47_2Corintios.mp3"],
+    "48": ["48_Galatas.mp3"],
+    "49": ["49_Efesios.mp3"],
+    "50": ["50_Filipenses.mp3", "50_Filipenses_Acalmar.mp3", "50_Filipenses_Completo.mp3"],
+    "51": ["51_Colossenses_20min.mp3", "51_Colossenses_Adoracao.mp3", "51_Colossenses_Cap1-4.mp3", "51_Colossenses_Single.mp3"],
+    "52": ["52_1Tessalonicenses.mp3"],
+    "53": ["53_2Tessalonicenses.mp3"],
+    "54": ["54_1Timoteo.mp3"],
+    "55": ["55_2Timoteo.mp3"],
+    "56": ["56_Tito.mp3"],
+    "57": ["57_Filemom.mp3"],
+    "58": ["58_Hebreus.mp3"],
+    "59": ["59_Tiago.mp3"],
+    "60": ["60_1Pedro.mp3"],
+    "61": ["61_2Pedro.mp3"],
+    "62": ["62_1Joao.mp3"],
+    "63": ["63_2Joao.mp3"],
+    "64": ["64_3Joao.mp3"],
+    "65": ["65_Judas.mp3"],
+    "66": ["66_Apocalipse_Parte1.mp3", "66_Apocalipse_Parte2.mp3", "66_Apocalipse_Parte3.mp3"]
+};
+
+function openPlayer(bookNumber, bookName) {
+    const modal = document.getElementById('playerModal');
+    const title = document.getElementById('playerTitle');
+    const container = document.getElementById('audioContainer');
+    
+    container.innerHTML = '';
+    
+    title.innerHTML = bookNumber + '. ' + bookName;
+    if (bookNumber === '44') {
+        title.innerHTML += ' <span class="new-badge">Parte 3 NOVA!</span>';
+    }
+    
+    const files = mp3Files[bookNumber];
+    if (!files) {
+        container.innerHTML = '<p>Nenhum arquivo disponível para este livro.</p>';
+        modal.style.display = 'block';
+        return;
+    }
+    
+    files.forEach(file => {
+        const div = document.createElement('div');
+        div.className = 'audio-item';
+        
+        let label = file.replace(/^\d+_/, '').replace('.mp3', '');
+        label = label.replace(/_/g, ' ');
+        
+        if (file.includes('Parte1')) label = 'Parte 1 (Capítulos 1-9)';
+        if (file.includes('Parte2')) label = 'Parte 2 (Capítulos 10-19)';
+        if (file.includes('Parte3')) label = 'Parte 3 (Capítulos 20-28) - NOVA!';
+        
+        div.innerHTML = '<div class="audio-label">' + label + '</div>' +
+                       '<audio controls>' +
+                       '<source src="' + baseUrl + '/' + file + '" type="audio/mpeg">' +
+                       'Seu navegador não suporta o elemento de áudio.' +
+                       '</audio>';
+        
+        container.appendChild(div);
+    });
+    
+    modal.style.display = 'block';
+}
+
+function closePlayer() {
+    const modal = document.getElementById('playerModal');
+    const audios = modal.getElementsByTagName('audio');
+    for (let audio of audios) {
+        audio.pause();
+    }
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('playerModal');
+    if (event.target == modal) {
+        closePlayer();
+    }
+}
+</script>
+</body>
+</html>
