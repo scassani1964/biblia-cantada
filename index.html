@@ -3,90 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblia Cantada - 46 MP3 Completos</title>
+<title>Biblia Cantada - 66 Livros</title>
 <style>
-body { font-family: 'Segoe UI', Arial; background: #667eea; color: white; margin: 0; padding: 20px; }
-.container { max-width: 1200px; margin: auto; }
-.header { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
-h1 { font-size: 3em; margin: 0; }
-.stats { font-size: 1.5em; margin: 20px 0; color: #90EE90; }
-.content { background: white; color: #333; padding: 30px; border-radius: 20px; }
-.livro { background: #f8f8f8; margin: 20px 0; padding: 20px; border-radius: 10px; }
-.novo { background: #d4f4dd; border: 3px solid #4CAF50; }
-h2 { color: #667eea; }
-audio { width: 100%; margin: 10px 0; }
-.footer { text-align: center; margin-top: 30px; padding: 20px; }
-a { color: #667eea; text-decoration: none; font-weight: bold; }
-a:hover { text-decoration: underline; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); padding: 20px 20px 100px 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.header { background: white; padding: 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+h1 { color: #764ba2; font-size: 2.5em; margin: 0; }
+.subtitle { color: #666; margin: 10px 0; }
+.stats { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.stat-box { background: #667eea; color: white; padding: 15px 25px; border-radius: 10px; }
+.section { background: white; padding: 30px; border-radius: 20px; margin-bottom: 30px; }
+.section h2 { color: #764ba2; margin-bottom: 20px; }
+.books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.book-card { padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+.book-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.book-card.available { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+.book-card.not-available { background: #f0f0f0; opacity: 0.6; cursor: default; }
+.book-card.not-available:hover { transform: none; box-shadow: none; }
+.book-number { font-size: 1.5em; font-weight: bold; color: #667eea; }
+.book-name { font-size: 0.9em; margin-top: 5px; color: #333; }
+.new-badge { background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.7em; margin-left: 5px; }
+.footer { background: white; padding: 30px; border-radius: 20px; text-align: center; margin-top: 50px; }
+.footer a { color: #667eea; text-decoration: none; margin: 0 15px; font-weight: bold; }
 </style>
 </head>
 <body>
 <div class="container">
 <div class="header">
-<h1>Biblia Cantada</h1>
-<p>A Palavra de Deus em Audio - Portugues</p>
-<div class="stats">46 Arquivos MP3 - 66 Livros Biblicos</div>
+<h1>B&iacute;blia Cantada</h1>
+<p class="subtitle">A Palavra de Deus em &Aacute;udio</p>
+<p style="color: #999; margin-top: 5px;">Clique em um livro para ouvir</p>
+<div class="stats">
+<div class="stat-box"><div style="font-size: 2em; font-weight: bold;">46</div><div>Arquivos MP3</div></div>
+<div class="stat-box"><div style="font-size: 2em; font-weight: bold;">66</div><div>Livros B&iacute;blicos</div></div>
 </div>
-<div class="content">
-
-<div class="livro novo">
-<h2>44. Atos dos Apostolos - COMPLETO!</h2>
-<p><strong>NOVO:</strong> Parte 3 adicionada!</p>
-<p>Parte 1: Capitulos 1-9</p>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/44_Atos_Parte1.mp3" type="audio/mpeg"></audio>
-<p>Parte 2: Capitulos 10-19</p>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/44_Atos_Parte2.mp3" type="audio/mpeg"></audio>
-<p>Parte 3: Capitulos 20-28 <span style="color:red;">NOVO!</span></p>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/44_Atos_Parte3.mp3" type="audio/mpeg"></audio>
 </div>
 
-<div class="livro">
-<h2>01. Genesis</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/01_Genesis.mp3" type="audio/mpeg"></audio>
+<div class="section">
+<h2>Antigo Testamento (39 livros)</h2>
+<div class="books-grid">
+<div class="book-card available" onclick="openPlayer^('01', 'G^&ecirc;^nesis'^)"><div class="book-number">01</div><div class="book-name">G&ecirc;nesis</div></div>
+<div class="book-card not-available"><div class="book-number">02</div><div class="book-name">&Ecirc;xodo</div></div>
+<div class="book-card not-available"><div class="book-number">03</div><div class="book-name">Lev&iacute;tico</div></div>
+<div class="book-card not-available"><div class="book-number">04</div><div class="book-name">N&uacute;meros</div></div>
+<div class="book-card not-available"><div class="book-number">05</div><div class="book-name">Deuteron&ocirc;mio</div></div>
+<div class="book-card not-available"><div class="book-number">06</div><div class="book-name">Josu&eacute;</div></div>
+<div class="book-card not-available"><div class="book-number">07</div><div class="book-name">Ju&iacute;zes</div></div>
+<div class="book-card not-available"><div class="book-number">08</div><div class="book-name">Rute</div></div>
+<div class="book-card not-available"><div class="book-number">09</div><div class="book-name">1 Samuel</div></div>
+<div class="book-card not-available"><div class="book-number">10</div><div class="book-name">2 Samuel</div></div>
+<div class="book-card not-available"><div class="book-number">11</div><div class="book-name">1 Reis</div></div>
+<div class="book-card not-available"><div class="book-number">12</div><div class="book-name">2 Reis</div></div>
+<div class="book-card not-available"><div class="book-number">13</div><div class="book-name">1 Cr&ocirc;nicas</div></div>
+<div class="book-card not-available"><div class="book-number">14</div><div class="book-name">2 Cr&ocirc;nicas</div></div>
+<div class="book-card not-available"><div class="book-number">15</div><div class="book-name">Esdras</div></div>
+<div class="book-card not-available"><div class="book-number">16</div><div class="book-name">Neemias</div></div>
+<div class="book-card not-available"><div class="book-number">17</div><div class="book-name">Ester</div></div>
+<div class="book-card available" onclick="openPlayer^('18', 'J^&oacute;'^)"><div class="book-number">18</div><div class="book-name">J&oacute;</div></div>
+<div class="book-card available" onclick="openPlayer^('19', 'Salmos'^)"><div class="book-number">19</div><div class="book-name">Salmos</div></div>
+<div class="book-card available" onclick="openPlayer^('20', 'Prov^&eacute;^rbios'^)"><div class="book-number">20</div><div class="book-name">Prov&eacute;rbios</div></div>
+<div class="book-card available" onclick="openPlayer^('21', 'Eclesiastes'^)"><div class="book-number">21</div><div class="book-name">Eclesiastes</div></div>
+<div class="book-card not-available"><div class="book-number">22</div><div class="book-name">C&acirc;nticos</div></div>
+<div class="book-card not-available"><div class="book-number">23</div><div class="book-name">Isa&iacute;as</div></div>
+<div class="book-card not-available"><div class="book-number">24</div><div class="book-name">Jeremias</div></div>
+<div class="book-card not-available"><div class="book-number">25</div><div class="book-name">Lamenta&ccedil;&otilde;es</div></div>
+<div class="book-card not-available"><div class="book-number">26</div><div class="book-name">Ezequiel</div></div>
+<div class="book-card not-available"><div class="book-number">27</div><div class="book-name">Daniel</div></div>
+<div class="book-card not-available"><div class="book-number">28</div><div class="book-name">Os&eacute;ias</div></div>
+<div class="book-card not-available"><div class="book-number">29</div><div class="book-name">Joel</div></div>
+<div class="book-card not-available"><div class="book-number">30</div><div class="book-name">Am&oacute;s</div></div>
+<div class="book-card not-available"><div class="book-number">31</div><div class="book-name">Obadias</div></div>
+<div class="book-card not-available"><div class="book-number">32</div><div class="book-name">Jonas</div></div>
+<div class="book-card not-available"><div class="book-number">33</div><div class="book-name">Miqu&eacute;ias</div></div>
+<div class="book-card not-available"><div class="book-number">34</div><div class="book-name">Naum</div></div>
+<div class="book-card not-available"><div class="book-number">35</div><div class="book-name">Habacuque</div></div>
+<div class="book-card not-available"><div class="book-number">36</div><div class="book-name">Sofonias</div></div>
+<div class="book-card not-available"><div class="book-number">37</div><div class="book-name">Ageu</div></div>
+<div class="book-card not-available"><div class="book-number">38</div><div class="book-name">Zacarias</div></div>
+<div class="book-card not-available"><div class="book-number">39</div><div class="book-name">Malaquias</div></div>
+</div>
 </div>
 
-<div class="livro">
-<h2>18. Jo</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/18_Jo.mp3" type="audio/mpeg"></audio>
+<div class="section">
+<h2>Novo Testamento (27 livros)</h2>
+<div class="books-grid">
+<div class="book-card available" onclick="openPlayer^('40', 'Mateus'^)"><div class="book-number">40</div><div class="book-name">Mateus</div></div>
+<div class="book-card available" onclick="openPlayer^('41', 'Marcos'^)"><div class="book-number">41</div><div class="book-name">Marcos</div></div>
+<div class="book-card available" onclick="openPlayer^('42', 'Lucas'^)"><div class="book-number">42</div><div class="book-name">Lucas</div></div>
+<div class="book-card available" onclick="openPlayer^('43', 'Jo^&atilde;^o'^)"><div class="book-number">43</div><div class="book-name">Jo&atilde;o</div></div>
+<div class="book-card available" onclick="openPlayer^('44', 'Atos'^)"><div class="book-number">44</div><div class="book-name">Atos<span class="new-badge">NOVO</span></div></div>
+<div class="book-card available" onclick="openPlayer^('45', 'Romanos'^)"><div class="book-number">45</div><div class="book-name">Romanos</div></div>
+<div class="book-card available" onclick="openPlayer^('46', '1 Cor^&iacute;^ntios'^)"><div class="book-number">46</div><div class="book-name">1 Cor&iacute;ntios</div></div>
+<div class="book-card available" onclick="openPlayer^('47', '2 Cor^&iacute;^ntios'^)"><div class="book-number">47</div><div class="book-name">2 Cor&iacute;ntios</div></div>
+<div class="book-card available" onclick="openPlayer^('48', 'G^&aacute;^latas'^)"><div class="book-number">48</div><div class="book-name">G&aacute;latas</div></div>
+<div class="book-card available" onclick="openPlayer^('49', 'Ef^&eacute;^sios'^)"><div class="book-number">49</div><div class="book-name">Ef&eacute;sios</div></div>
+<div class="book-card available" onclick="openPlayer^('50', 'Filipenses'^)"><div class="book-number">50</div><div class="book-name">Filipenses</div></div>
+<div class="book-card available" onclick="openPlayer^('51', 'Colossenses'^)"><div class="book-number">51</div><div class="book-name">Colossenses</div></div>
+<div class="book-card available" onclick="openPlayer^('52', '1 Tessalonicenses'^)"><div class="book-number">52</div><div class="book-name">1 Tessalonicenses</div></div>
+<div class="book-card available" onclick="openPlayer^('53', '2 Tessalonicenses'^)"><div class="book-number">53</div><div class="book-name">2 Tessalonicenses</div></div>
+<div class="book-card available" onclick="openPlayer^('54', '1 Tim^&oacute;^teo'^)"><div class="book-number">54</div><div class="book-name">1 Tim&oacute;teo</div></div>
+<div class="book-card available" onclick="openPlayer^('55', '2 Tim^&oacute;^teo'^)"><div class="book-number">55</div><div class="book-name">2 Tim&oacute;teo</div></div>
+<div class="book-card available" onclick="openPlayer^('56', 'Tito'^)"><div class="book-number">56</div><div class="book-name">Tito</div></div>
+<div class="book-card available" onclick="openPlayer^('57', 'Filemom'^)"><div class="book-number">57</div><div class="book-name">Filemom</div></div>
+<div class="book-card available" onclick="openPlayer^('58', 'Hebreus'^)"><div class="book-number">58</div><div class="book-name">Hebreus</div></div>
+<div class="book-card available" onclick="openPlayer^('59', 'Tiago'^)"><div class="book-number">59</div><div class="book-name">Tiago</div></div>
+<div class="book-card available" onclick="openPlayer^('60', '1 Pedro'^)"><div class="book-number">60</div><div class="book-name">1 Pedro</div></div>
+<div class="book-card available" onclick="openPlayer^('61', '2 Pedro'^)"><div class="book-number">61</div><div class="book-name">2 Pedro</div></div>
+<div class="book-card available" onclick="openPlayer^('62', '1 Jo^&atilde;^o'^)"><div class="book-number">62</div><div class="book-name">1 Jo&atilde;o</div></div>
+<div class="book-card available" onclick="openPlayer^('63', '2 Jo^&atilde;^o'^)"><div class="book-number">63</div><div class="book-name">2 Jo&atilde;o</div></div>
+<div class="book-card available" onclick="openPlayer^('64', '3 Jo^&atilde;^o'^)"><div class="book-number">64</div><div class="book-name">3 Jo&atilde;o</div></div>
+<div class="book-card available" onclick="openPlayer^('65', 'Judas'^)"><div class="book-number">65</div><div class="book-name">Judas</div></div>
+<div class="book-card available" onclick="openPlayer^('66', 'Apocalipse'^)"><div class="book-number">66</div><div class="book-name">Apocalipse</div></div>
+</div>
 </div>
 
-<div class="livro">
-<h2>19. Salmos</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/19_Salmos_1h07.mp3" type="audio/mpeg"></audio>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/19_Salmos_Adoracao.mp3" type="audio/mpeg"></audio>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/19_Salmos_Paz.mp3" type="audio/mpeg"></audio>
-</div>
-
-<div class="livro">
-<h2>43. Joao</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/43_Joao_Parte1.mp3" type="audio/mpeg"></audio>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/43_Joao_Parte2.mp3" type="audio/mpeg"></audio>
-</div>
-
-<div class="livro">
-<h2>45. Romanos</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/45_Romanos.mp3" type="audio/mpeg"></audio>
-</div>
-
-<div class="livro">
-<h2>66. Apocalipse</h2>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/66_Apocalipse_Parte1.mp3" type="audio/mpeg"></audio>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/66_Apocalipse_Parte2.mp3" type="audio/mpeg"></audio>
-<audio controls><source src="https://archive.org/download/biblia-cantada-audio-portugues/66_Apocalipse_Parte3.mp3" type="audio/mpeg"></audio>
-</div>
-
-<p style="text-align:center; margin:40px 0;">
-<em>E muitos outros livros...</em>
-</p>
-
-</div>
 <div class="footer">
-<p>Links Uteis:</p>
-<a href="https://archive.org/details/biblia-cantada-audio-portugues" target="_blank">Archive.org - Todos os 46 MP3</a> |
-<a href="https://youtube.com/playlist?list=PLZNgjVVcwVc7n5HbCrdM1Vk5A41Iq42Hf" target="_blank">YouTube Playlist</a> |
+<p><strong>Links &Uacute;teis:</strong></p>
+<a href="https://archive.org/details/biblia-cantada-audio-portugues" target="_blank">Archive.org (46 MP3)</a> |
+<a href="https://youtube.com/playlist?list=PLZNgjVVcwVc7n5HbCrdM1Vk5A41Iq42Hf" target="_blank">YouTube</a> |
 <a href="https://github.com/scassani1964/biblia-cantada" target="_blank">GitHub</a>
-<p style="margin-top:20px;">© 2025 Biblia Cantada - Stephane Cassani</p>
+<p style="margin-top: 20px;">&copy; 2025 B&iacute;blia Cantada - St&eacute;phane Cassani</p>
 </div>
 </div>
+
+<script>
+function openPlayer(num, name) {
+  alert('Player para ' + name + ' - Em desenvolvimento');
+}
+</script>
 </body>
 </html>
