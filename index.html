@@ -209,21 +209,6 @@
             text-decoration: underline;
         }
 
-        .fallback-link {
-            display: block;
-            margin-top: 20px;
-            padding: 10px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .fallback-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
         @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
@@ -541,21 +526,16 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 class="modal-title" id="modalTitle">Título</h2>
             <div id="audioList"></div>
-            <div class="fallback-link">
+            <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 10px; text-align: center;">
                 <p>Problemas com o áudio?</p>
-                <a href="https://archive.org/details/biblia-cantada" target="_blank">Ouvir direto no Archive.org &rarr;</a>
+                <a href="https://archive.org/details/biblia-cantada" target="_blank" style="color: #667eea; text-decoration: none; font-weight: bold;">Ouvir direto no Archive.org &rarr;</a>
             </div>
         </div>
     </div>
 
     <script>
-        // NOVO ARCHIVE.ORG - Compte créé aujourd'hui
-        const archiveUrls = [
-            'https://archive.org/download/biblia-cantada/',
-            'https://ia801501.us.archive.org/11/items/biblia-cantada/',
-            'https://ia601501.us.archive.org/11/items/biblia-cantada/',
-            'https://ia903500.us.archive.org/11/items/biblia-cantada/'
-        ];
+        // URL base do Archive.org
+        const baseUrl = 'https://archive.org/download/biblia-cantada/';
         
         // Mapeamento dos arquivos MP3
         const mp3Files = {
@@ -578,7 +558,7 @@
             44: [
                 {file: '44_Atos_Parte1.mp3', label: 'Atos - Parte 1 (Cap. 1-9)'},
                 {file: '44_Atos_Parte2.mp3', label: 'Atos - Parte 2 (Cap. 10-19)'},
-                {file: '44_Atos_Parte3.mp3', label: 'Atos - Parte 3 (Cap. 20-28) 🆕'}
+                {file: '44_Atos_Parte3.mp3', label: 'Atos - Parte 3 (Cap. 20-28)'}
             ],
             45: [
                 {file: '45_Romanos.mp3', label: 'Romanos - Principal'},
@@ -646,31 +626,9 @@
                     audio.controls = true;
                     audio.preload = 'metadata';
                     
-                    // Essayer plusieurs URLs Archive.org
-                    archiveUrls.forEach(url => {
-                        const source = document.createElement('source');
-                        source.src = url + fileInfo.file;
-                        source.type = 'audio/mpeg';
-                        audio.appendChild(source);
-                    });
-                    
-                    // Gestion des erreurs
-                    audio.onerror = function() {
-                        console.error('Erro ao carregar:', fileInfo.file);
-                        // Essayer l'URL directe
-                        audio.src = 'https://archive.org/download/biblia-cantada/' + fileInfo.file;
-                        
-                        // Si toujours erreur, afficher message
-                        audio.onerror = function() {
-                            const errorDiv = document.createElement('div');
-                            errorDiv.style.color = 'red';
-                            errorDiv.innerHTML = `
-                                <p>Erro ao carregar o áudio.</p>
-                                <p><a href="https://archive.org/details/biblia-cantada" target="_blank">Abrir no Archive.org</a></p>
-                            `;
-                            audioContainer.appendChild(errorDiv);
-                        };
-                    };
+                    // URL simple et directe
+                    const audioUrl = baseUrl + fileInfo.file;
+                    audio.src = audioUrl;
                     
                     audioContainer.appendChild(audio);
                     audioList.appendChild(audioContainer);
@@ -698,9 +656,9 @@
             }
         }
         
-        // Log pour debug
-        console.log('Archive.org URLs configurées:', archiveUrls);
-        console.log('Total de livros disponíveis:', Object.keys(mp3Files).length);
+        // Log pour vérification
+        console.log('Biblia Cantada - Archive.org configuré');
+        console.log('URL base:', baseUrl);
     </script>
 </body>
 </html>
