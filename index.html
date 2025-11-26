@@ -1,81 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B&iacute;blia Cantada - 66 Livros em &Aacute;udio</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh; color: #fff; padding: 20px;
-        }
-        h1 { text-align: center; margin: 20px 0; font-size: 2.5em; color: #ffd700; }
-        .stats { text-align: center; margin-bottom: 30px; color: #aaa; }
-        .container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
-            gap: 10px; max-width: 1200px; margin: 0 auto;
-        }
-        .book { 
-            background: linear-gradient(145deg, #2d2d44 0%, #1f1f2e 100%);
-            border-radius: 10px; padding: 15px 10px; text-align: center;
-            cursor: pointer; transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .book:hover { transform: translateY(-5px); border-color: #ffd700; }
-        .book.available { background: linear-gradient(145deg, #1e5631 0%, #143d22 100%); }
-        .book.unavailable { opacity: 0.4; cursor: not-allowed; }
-        .book-num { font-size: 0.8em; color: #888; }
-        .book-name { font-size: 1em; margin-top: 5px; font-weight: bold; }
-        .modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000;
-        }
-        .modal.active { display: flex; }
-        .modal-content { 
-            background: #2d2d44; padding: 30px; border-radius: 15px; 
-            max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
-        }
-        .modal h2 { color: #ffd700; margin-bottom: 20px; }
-        .modal-file { 
-            padding: 15px; margin: 10px 0; background: #1f1f2e; 
-            border-radius: 8px; cursor: pointer; transition: background 0.3s;
-        }
-        .modal-file:hover { background: #3d3d5c; }
-        .close-btn { float: right; font-size: 1.5em; cursor: pointer; color: #888; }
-        .close-btn:hover { color: #fff; }
-        #player { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: #0d0d1a; padding: 15px; text-align: center;
-        }
-        #player audio { width: 100%; max-width: 600px; }
-        #player-title { color: #ffd700; margin-bottom: 10px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B&iacute;blia Cantada - 66 Livros em &Aacute;udio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);min-height:100vh;color:#fff;padding:20px}
+h1{text-align:center;margin:20px 0;font-size:2.5em;color:#ffd700}
+.stats{text-align:center;margin-bottom:30px;color:#aaa}
+.container{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;max-width:1200px;margin:0 auto}
+.book{background:linear-gradient(145deg,#2d2d44 0%,#1f1f2e 100%);border-radius:10px;padding:15px 10px;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent}
+.book:hover{transform:translateY(-5px);border-color:#ffd700}
+.book.available{background:linear-gradient(145deg,#1e5631 0%,#143d22 100%)}
+.book.unavailable{opacity:0.4;cursor:not-allowed}
+.book-num{font-size:0.8em;color:#888}
+.book-name{font-size:1em;margin-top:5px;font-weight:bold}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000}
+.modal.active{display:flex}
+.modal-content{background:#2d2d44;padding:30px;border-radius:15px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+.modal h2{color:#ffd700;margin-bottom:20px}
+.modal-file{padding:15px;margin:10px 0;background:#1f1f2e;border-radius:8px;cursor:pointer;transition:background 0.3s}
+.modal-file:hover{background:#3d3d5c}
+.close-btn{float:right;font-size:1.5em;cursor:pointer;color:#888}
+.close-btn:hover{color:#fff}
+#player{position:fixed;bottom:0;left:0;right:0;background:#0d0d1a;padding:15px;text-align:center}
+#player audio{width:100%;max-width:600px}
+#player-title{color:#ffd700;margin-bottom:10px}
+</style>
 </head>
 <body>
-    <h1>B&iacute;blia Cantada</h1>
-    <div class="stats">66 Livros da B&iacute;blia em &Aacute;udio | 49 arquivos MP3 | 35 livros dispon&iacute;veis</div>
-    <div class="container" id="books"></div>
-    
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-files"></div>
-        </div>
-    </div>
-    
-    <div id="player" style="display:none;">
-        <div id="player-title"></div>
-        <audio id="audio" controls></audio>
-    </div>
-
-    <script>
-        const ARCHIVE_URL = 'https://archive.org/download/biblia-cantada/';
-        const BOOKS = [
-  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}]},
+<h1>B&iacute;blia Cantada</h1>
+<div class="stats">66 Livros da B&iacute;blia em &Aacute;udio | 49 arquivos MP3 | 35 livros dispon&iacute;veis</div>
+<div class="container" id="books"></div>
+<div class="modal" id="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><h2 id="modal-title"></h2><div id="modal-files"></div></div></div>
+<div id="player" style="display:none;"><div id="player-title"></div><audio id="audio" controls></audio></div>
+<script>
+const ARCHIVE_URL='https://archive.org/download/biblia-cantada/';
+const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}]},
   {n:2,name:'Exodo'},
   {n:3,name:'Levitico'},
   {n:4,name:'Numeros'},
@@ -141,50 +103,12 @@
   {n:64,name:'3 Joao',files:[{name:'3Joao',file:'64_3Joao.mp3'}]},
   {n:65,name:'Judas',files:[{name:'Judas',file:'65_Judas.mp3'}]},
   {n:66,name:'Apocalipse',files:[{name:'Apocalipse Parte1',file:'66_Apocalipse_Parte1.mp3'},{name:'Apocalipse Parte2',file:'66_Apocalipse_Parte2.mp3'},{name:'Apocalipse Parte3',file:'66_Apocalipse_Parte3.mp3'}]},
-        ];
-
-        function init() {
-            const container = document.getElementById('books');
-            BOOKS.forEach(book => {
-                const div = document.createElement('div');
-                div.className = 'book ' + (book.files ? 'available' : 'unavailable');
-                div.innerHTML = '<div class="book-num">' + book.n + '</div><div class="book-name">' + book.name + '</div>';
-                if (book.files) {
-                    div.onclick = () => book.files.length === 1 ? play(book.name, book.files[0]) : showModal(book);
-                }
-                container.appendChild(div);
-            });
-        }
-
-        function play(name, file) {
-            document.getElementById('player').style.display = 'block';
-            document.getElementById('player-title').textContent = name + ' - ' + file.name;
-            const audio = document.getElementById('audio');
-            audio.src = ARCHIVE_URL + file.file;
-            audio.play();
-            closeModal();
-        }
-
-        function showModal(book) {
-            document.getElementById('modal-title').textContent = book.name;
-            const container = document.getElementById('modal-files');
-            container.innerHTML = '';
-            book.files.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'modal-file';
-                div.textContent = file.name;
-                div.onclick = () => play(book.name, file);
-                container.appendChild(div);
-            });
-            document.getElementById('modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
-
-        document.getElementById('modal').onclick = e => { if(e.target.id === 'modal') closeModal(); };
-        init();
-    </script>
+];
+function init(){const c=document.getElementById('books');BOOKS.forEach(b=>{const d=document.createElement('div');d.className='book '+(b.files?'available':'unavailable');d.innerHTML='<div class="book-num">'+b.n+'</div><div class="book-name">'+b.name+'</div>';if(b.files)d.onclick=()=>b.files.length===1?play(b.name,b.files[0]):showModal(b);c.appendChild(d)})}
+function play(n,f){document.getElementById('player').style.display='block';document.getElementById('player-title').textContent=n+' - '+f.name;const a=document.getElementById('audio');a.src=ARCHIVE_URL+f.file;a.play();closeModal()}
+function showModal(b){document.getElementById('modal-title').textContent=b.name;const c=document.getElementById('modal-files');c.innerHTML='';b.files.forEach(f=>{const d=document.createElement('div');d.className='modal-file';d.textContent=f.name;d.onclick=()=>play(b.name,f);c.appendChild(d)});document.getElementById('modal').classList.add('active')}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};init();
+</script>
 </body>
 </html>
