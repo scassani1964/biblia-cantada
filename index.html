@@ -31,7 +31,7 @@ h1{text-align:center;margin:20px 0;font-size:2.5em;color:#ffd700}
 </head>
 <body>
 <h1>B&iacute;blia Cantada</h1>
-<div class="stats">66 Livros da B&iacute;blia em &Aacute;udio | 92 arquivos MP3 | 35 livros dispon&iacute;veis</div>
+<div class="stats">66 Livros da B&iacute;blia em &Aacute;udio | 109 arquivos MP3 | 35 livros dispon&iacute;veis</div>
 <div class="container" id="books"></div>
 <div class="modal" id="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><h2 id="modal-title"></h2><div id="modal-files"></div></div></div>
 <div id="player" style="display:none;"><div id="player-title"></div><audio id="audio" controls></audio></div>
@@ -44,7 +44,7 @@ const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}
   {n:5,name:'Deuteronomio'},
   {n:6,name:'Josue',files:[{name:'Josue',file:'06_Josue.mp3'},{name:'Josue louvores do livro de',file:'06_Josue_louvores_do_livro_de.mp3'}]},
   {n:7,name:'Juizes'},
-  {n:8,name:'Rute',files:[{name:'Rute',file:'08_Rute.mp3'},{name:'Rute bblia cantada louvor',file:'08_Rute_bblia_cantada_louvor.mp3'}]},
+  {n:8,name:'Rute',files:[{name:'Rute',file:'08_Rute.mp3'},{name:'Rute bblia cantada louvor',file:'08_Rute_bblia_cantada_louvor.mp3'},{name:'Rute byblia cantada louvo',file:'08_Rute_byblia_cantada_louvo.mp3'}]},
   {n:9,name:'1 Samuel'},
   {n:10,name:'2 Samuel'},
   {n:11,name:'1 Reis'},
@@ -55,9 +55,9 @@ const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}
   {n:16,name:'Neemias'},
   {n:17,name:'Ester'},
   {n:18,name:'Jo',files:[{name:'Jo',file:'18_Jo.mp3'},{name:'Jo 1 2 e 3 cartas de o ',file:'18_Jo_1_2_e_3_cartas_de_o_.mp3'},{name:'Jo Parte1',file:'18_Jo_Parte1.mp3'},{name:'Jo Parte2',file:'18_Jo_Parte2.mp3'},{name:'Jo primeira carta de o ',file:'18_Jo_primeira_carta_de_o_.mp3'},{name:'Jo segunda carta de o b',file:'18_Jo_segunda_carta_de_o_b.mp3'},{name:'Jo terceira carta de o ',file:'18_Jo_terceira_carta_de_o_.mp3'}]},
-  {n:19,name:'Salmos',files:[{name:'Salmos',file:'19_Salmos.mp3'},{name:'Salmos 1 hora dos melhores ',file:'19_Salmos_1_hora_dos_melhores_.mp3'},{name:'Salmos 1h07',file:'19_Salmos_1h07.mp3'},{name:'Salmos 91',file:'19_Salmos_91.mp3'},{name:'Salmos Adoracao',file:'19_Salmos_Adoracao.mp3'},{name:'Salmos cantados para adorao',file:'19_Salmos_cantados_para_adorao.mp3'},{name:'Salmos cantados para aument',file:'19_Salmos_cantados_para_aument.mp3'},{name:'Salmos clamor por justia  q',file:'19_Salmos_clamor_por_justia__q.mp3'},{name:'Salmos deus reina sobre as ',file:'19_Salmos_deus_reina_sobre_as_.mp3'},{name:'Salmos em forma de cano uma',file:'19_Salmos_em_forma_de_cano_uma.mp3'},{name:'Salmos o arrependimento e a',file:'19_Salmos_o_arrependimento_e_a.mp3'},{name:'Salmos OrarComPoder',file:'19_Salmos_OrarComPoder.mp3'},{name:'Salmos OrarComPoder v2',file:'19_Salmos_OrarComPoder_v2.mp3'},{name:'Salmos Paz',file:'19_Salmos_Paz.mp3'}]},
+  {n:19,name:'Salmos',files:[{name:'Salmos',file:'19_Salmos.mp3'},{name:'Salmos 1 hora dos melhores ',file:'19_Salmos_1_hora_dos_melhores_.mp3'},{name:'Salmos 1h07',file:'19_Salmos_1h07.mp3'},{name:'Salmos 91',file:'19_Salmos_91.mp3'},{name:'Salmos Adoracao',file:'19_Salmos_Adoracao.mp3'},{name:'Salmos cantados para adorao',file:'19_Salmos_cantados_para_adorao.mp3'},{name:'Salmos cantados para aument',file:'19_Salmos_cantados_para_aument.mp3'},{name:'Salmos clamor por justia  q',file:'19_Salmos_clamor_por_justia__q.mp3'},{name:'Salmos deus reina sobre as ',file:'19_Salmos_deus_reina_sobre_as_.mp3'},{name:'Salmos em forma de cano uma',file:'19_Salmos_em_forma_de_cano_uma.mp3'},{name:'Salmos em forma de canoo um',file:'19_Salmos_em_forma_de_canoo_um.mp3'},{name:'Salmos o arrependimento e a',file:'19_Salmos_o_arrependimento_e_a.mp3'},{name:'Salmos OrarComPoder',file:'19_Salmos_OrarComPoder.mp3'},{name:'Salmos OrarComPoder v2',file:'19_Salmos_OrarComPoder_v2.mp3'},{name:'Salmos Paz',file:'19_Salmos_Paz.mp3'}]},
   {n:20,name:'Proverbios',files:[{name:'Proverbios',file:'20_Proverbios.mp3'}]},
-  {n:21,name:'Eclesiastes',files:[{name:'Eclesiastes',file:'21_Eclesiastes.mp3'},{name:'Eclesiastes bblia cantada com',file:'21_Eclesiastes_bblia_cantada_com.mp3'},{name:'Eclesiastes Completo',file:'21_Eclesiastes_Completo.mp3'}]},
+  {n:21,name:'Eclesiastes',files:[{name:'Eclesiastes',file:'21_Eclesiastes.mp3'},{name:'Eclesiastes bblia cantada com',file:'21_Eclesiastes_bblia_cantada_com.mp3'},{name:'Eclesiastes byblia cantada com',file:'21_Eclesiastes_byblia_cantada_com.mp3'},{name:'Eclesiastes Completo',file:'21_Eclesiastes_Completo.mp3'}]},
   {n:22,name:'Canticos'},
   {n:23,name:'Isaias'},
   {n:24,name:'Jeremias'},
@@ -68,7 +68,7 @@ const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}
   {n:29,name:'Joel'},
   {n:30,name:'Amos'},
   {n:31,name:'Obadias'},
-  {n:32,name:'Jonas',files:[{name:'Jonas',file:'32_Jonas.mp3'},{name:'Jonas bblia cantada louvor',file:'32_Jonas_bblia_cantada_louvor.mp3'}]},
+  {n:32,name:'Jonas',files:[{name:'Jonas',file:'32_Jonas.mp3'},{name:'Jonas bblia cantada louvor',file:'32_Jonas_bblia_cantada_louvor.mp3'},{name:'Jonas byblia cantada louvo',file:'32_Jonas_byblia_cantada_louvo.mp3'}]},
   {n:33,name:'Miqueias'},
   {n:34,name:'Naum'},
   {n:35,name:'Habacuque'},
@@ -77,23 +77,23 @@ const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}
   {n:38,name:'Zacarias'},
   {n:39,name:'Malaquias'},
   {n:40,name:'Mateus',files:[{name:'Mateus Parte2',file:'40_Mateus_Parte2.mp3'}]},
-  {n:41,name:'Marcos',files:[{name:'Marcos',file:'41_Marcos.mp3'},{name:'Marcos evangelho de  bblia ',file:'41_Marcos_evangelho_de__bblia_.mp3'},{name:'Marcos Parte1',file:'41_Marcos_Parte1.mp3'}]},
-  {n:42,name:'Lucas',files:[{name:'Lucas',file:'42_Lucas.mp3'},{name:'Lucas 1324 bblia cantada c',file:'42_Lucas_1324_bblia_cantada_c.mp3'},{name:'Lucas Parte2',file:'42_Lucas_Parte2.mp3'}]},
+  {n:41,name:'Marcos',files:[{name:'Marcos',file:'41_Marcos.mp3'},{name:'Marcos evangelho de  bblia ',file:'41_Marcos_evangelho_de__bblia_.mp3'},{name:'Marcos evangelho de  byblia',file:'41_Marcos_evangelho_de__byblia.mp3'},{name:'Marcos Parte1',file:'41_Marcos_Parte1.mp3'}]},
+  {n:42,name:'Lucas',files:[{name:'Lucas',file:'42_Lucas.mp3'},{name:'Lucas 1324 bblia cantada c',file:'42_Lucas_1324_bblia_cantada_c.mp3'},{name:'Lucas 1324 byblia cantada ',file:'42_Lucas_1324_byblia_cantada_.mp3'},{name:'Lucas Parte2',file:'42_Lucas_Parte2.mp3'}]},
   {n:43,name:'Joao',files:[{name:'Joao Parte1',file:'43_Joao_Parte1.mp3'},{name:'Joao Parte2',file:'43_Joao_Parte2.mp3'}]},
   {n:44,name:'Atos',files:[{name:'Atos Parte1',file:'44_Atos_Parte1.mp3'},{name:'Atos Parte2',file:'44_Atos_Parte2.mp3'},{name:'Atos Parte3',file:'44_Atos_Parte3.mp3'}]},
-  {n:45,name:'Romanos',files:[{name:'Romanos',file:'45_Romanos.mp3'},{name:'Romanos bblia cantada msicas',file:'45_Romanos_bblia_cantada_msicas.mp3'},{name:'Romanos carta aos  bblia can',file:'45_Romanos_carta_aos__bblia_can.mp3'},{name:'Romanos carta aos  bblia can v2',file:'45_Romanos_carta_aos__bblia_can_v2.mp3'},{name:'Romanos Musicas',file:'45_Romanos_Musicas.mp3'}]},
+  {n:45,name:'Romanos',files:[{name:'Romanos',file:'45_Romanos.mp3'},{name:'Romanos bblia cantada msicas',file:'45_Romanos_bblia_cantada_msicas.mp3'},{name:'Romanos byblia cantada msica',file:'45_Romanos_byblia_cantada_msica.mp3'},{name:'Romanos carta aos  bblia can',file:'45_Romanos_carta_aos__bblia_can.mp3'},{name:'Romanos carta aos  bblia can v2',file:'45_Romanos_carta_aos__bblia_can_v2.mp3'},{name:'Romanos carta aos  byblia ca',file:'45_Romanos_carta_aos__byblia_ca.mp3'},{name:'Romanos carta aos  byblia ca v2',file:'45_Romanos_carta_aos__byblia_ca_v2.mp3'},{name:'Romanos Musicas',file:'45_Romanos_Musicas.mp3'}]},
   {n:46,name:'1 Corintios',files:[{name:'1Corintios',file:'46_1Corintios.mp3'}]},
   {n:47,name:'2 Corintios',files:[{name:'2Corintios',file:'47_2Corintios.mp3'}]},
   {n:48,name:'Galatas',files:[{name:'Galatas',file:'48_Galatas.mp3'}]},
   {n:49,name:'Efesios',files:[{name:'Efesios',file:'49_Efesios.mp3'}]},
-  {n:50,name:'Filipenses',files:[{name:'Filipenses',file:'50_Filipenses.mp3'},{name:'Filipenses Acalmar',file:'50_Filipenses_Acalmar.mp3'},{name:'Filipenses carta aos  bblia can',file:'50_Filipenses_carta_aos__bblia_can.mp3'},{name:'Filipenses carta aos  bblia can v2',file:'50_Filipenses_carta_aos__bblia_can_v2.mp3'},{name:'Filipenses Completo',file:'50_Filipenses_Completo.mp3'}]},
-  {n:51,name:'Colossenses',files:[{name:'Colossenses',file:'51_Colossenses.mp3'},{name:'Colossenses 20min',file:'51_Colossenses_20min.mp3'},{name:'Colossenses a palavra viva em',file:'51_Colossenses_a_palavra_viva_em.mp3'},{name:'Colossenses Adoracao',file:'51_Colossenses_Adoracao.mp3'},{name:'Colossenses Cap1',file:'51_Colossenses_Cap1.mp3'},{name:'Colossenses Cap1-4',file:'51_Colossenses_Cap1-4.mp3'},{name:'Colossenses carta aos  bblia ca',file:'51_Colossenses_carta_aos__bblia_ca.mp3'},{name:'Colossenses Single',file:'51_Colossenses_Single.mp3'}]},
+  {n:50,name:'Filipenses',files:[{name:'Filipenses',file:'50_Filipenses.mp3'},{name:'Filipenses Acalmar',file:'50_Filipenses_Acalmar.mp3'},{name:'Filipenses carta aos  bblia can',file:'50_Filipenses_carta_aos__bblia_can.mp3'},{name:'Filipenses carta aos  bblia can v2',file:'50_Filipenses_carta_aos__bblia_can_v2.mp3'},{name:'Filipenses carta aos  byblia ca',file:'50_Filipenses_carta_aos__byblia_ca.mp3'},{name:'Filipenses carta aos  byblia ca v2',file:'50_Filipenses_carta_aos__byblia_ca_v2.mp3'},{name:'Filipenses Completo',file:'50_Filipenses_Completo.mp3'}]},
+  {n:51,name:'Colossenses',files:[{name:'Colossenses',file:'51_Colossenses.mp3'},{name:'Colossenses 20min',file:'51_Colossenses_20min.mp3'},{name:'Colossenses a palavra viva em',file:'51_Colossenses_a_palavra_viva_em.mp3'},{name:'Colossenses Adoracao',file:'51_Colossenses_Adoracao.mp3'},{name:'Colossenses Cap1',file:'51_Colossenses_Cap1.mp3'},{name:'Colossenses Cap1-4',file:'51_Colossenses_Cap1-4.mp3'},{name:'Colossenses carta aos  bblia ca',file:'51_Colossenses_carta_aos__bblia_ca.mp3'},{name:'Colossenses carta aos  byblia c',file:'51_Colossenses_carta_aos__byblia_c.mp3'},{name:'Colossenses Single',file:'51_Colossenses_Single.mp3'},{name:'Colossenses u a palavra viva e',file:'51_Colossenses_u_a_palavra_viva_e.mp3'}]},
   {n:52,name:'1 Tessalonicenses',files:[{name:'1Tessalonicenses',file:'52_1Tessalonicenses.mp3'}]},
   {n:53,name:'2 Tessalonicenses',files:[{name:'2Tessalonicenses',file:'53_2Tessalonicenses.mp3'}]},
   {n:54,name:'1 Timoteo',files:[{name:'1Timoteo',file:'54_1Timoteo.mp3'}]},
   {n:55,name:'2 Timoteo',files:[{name:'2Timoteo',file:'55_2Timoteo.mp3'}]},
-  {n:56,name:'Tito',files:[{name:'Tito',file:'56_Tito.mp3'},{name:'Tito carta a  bblia canta',file:'56_Tito_carta_a__bblia_canta.mp3'}]},
-  {n:57,name:'Filemom',files:[{name:'Filemom',file:'57_Filemom.mp3'},{name:'Filemom carta a  bblia canta',file:'57_Filemom_carta_a__bblia_canta.mp3'}]},
+  {n:56,name:'Tito',files:[{name:'Tito',file:'56_Tito.mp3'},{name:'Tito carta a  bblia canta',file:'56_Tito_carta_a__bblia_canta.mp3'},{name:'Tito carta a  byblia cant',file:'56_Tito_carta_a__byblia_cant.mp3'}]},
+  {n:57,name:'Filemom',files:[{name:'Filemom',file:'57_Filemom.mp3'},{name:'Filemom carta a  bblia canta',file:'57_Filemom_carta_a__bblia_canta.mp3'},{name:'Filemom carta a  byblia cant',file:'57_Filemom_carta_a__byblia_cant.mp3'}]},
   {n:58,name:'Hebreus',files:[{name:'Hebreus',file:'58_Hebreus.mp3'},{name:'Hebreus bblia cantada louvor',file:'58_Hebreus_bblia_cantada_louvor.mp3'}]},
   {n:59,name:'Tiago',files:[{name:'Tiago',file:'59_Tiago.mp3'},{name:'Tiago carta de  bblia cant',file:'59_Tiago_carta_de__bblia_cant.mp3'}]},
   {n:60,name:'1 Pedro',files:[{name:'1Pedro',file:'60_1Pedro.mp3'}]},
@@ -102,7 +102,7 @@ const BOOKS=[  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}
   {n:63,name:'2 Joao',files:[{name:'2Joao',file:'63_2Joao.mp3'}]},
   {n:64,name:'3 Joao',files:[{name:'3Joao',file:'64_3Joao.mp3'}]},
   {n:65,name:'Judas',files:[{name:'Judas',file:'65_Judas.mp3'},{name:'Judas bblia cantada louvor',file:'65_Judas_bblia_cantada_louvor.mp3'}]},
-  {n:66,name:'Apocalipse',files:[{name:'Apocalipse',file:'66_Apocalipse.mp3'},{name:'Apocalipse 1 bblia cantada por',file:'66_Apocalipse_1_bblia_cantada_por.mp3'},{name:'Apocalipse 2 cartas s igrejas',file:'66_Apocalipse_2_cartas_s_igrejas.mp3'},{name:'Apocalipse Parte1',file:'66_Apocalipse_Parte1.mp3'},{name:'Apocalipse Parte2',file:'66_Apocalipse_Parte2.mp3'},{name:'Apocalipse Parte3',file:'66_Apocalipse_Parte3.mp3'}]},
+  {n:66,name:'Apocalipse',files:[{name:'Apocalipse',file:'66_Apocalipse.mp3'},{name:'Apocalipse 1 bblia cantada por',file:'66_Apocalipse_1_bblia_cantada_por.mp3'},{name:'Apocalipse 2 cartas s igrejas',file:'66_Apocalipse_2_cartas_s_igrejas.mp3'},{name:'Apocalipse bblia cantada louvo',file:'66_Apocalipse_bblia_cantada_louvo.mp3'},{name:'Apocalipse em louvores bemaven',file:'66_Apocalipse_em_louvores_bemaven.mp3'},{name:'Apocalipse Parte1',file:'66_Apocalipse_Parte1.mp3'},{name:'Apocalipse Parte2',file:'66_Apocalipse_Parte2.mp3'},{name:'Apocalipse Parte3',file:'66_Apocalipse_Parte3.mp3'}]},
 ];
 function init(){const c=document.getElementById('books');BOOKS.forEach(b=>{const d=document.createElement('div');d.className='book '+(b.files?'available':'unavailable');d.innerHTML='<div class="book-num">'+b.n+'</div><div class="book-name">'+b.name+'</div>';if(b.files)d.onclick=()=>b.files.length===1?play(b.name,b.files[0]):showModal(b);c.appendChild(d)})}
 function play(n,f){document.getElementById('player').style.display='block';document.getElementById('player-title').textContent=n+' - '+f.name;const a=document.getElementById('audio');a.src=ARCHIVE_URL+f.file;a.play();closeModal()}
