@@ -53,7 +53,7 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #
 
 <div class="popup" id="popup">
 <div class="popup-box">
-<button class="close" onclick="fermer()">X</button>
+<button class="close" onclick="fechar()">X</button>
 <h2 id="pt"></h2>
 <p class="pv" id="pv"></p>
 <div class="player"><audio controls id="au"></audio></div>
@@ -65,7 +65,53 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #
 <script>
 var BASE="https://archive.org/download/confissoes-biblia-cantada-v2/";
 var C=[
-{n:1,i:"&#x1F60A;",f:"01_Alegria",t:"Eu sou alegre",v:"Neemias 8:10 ; Salmo 16:11",l:"[Verso 1]\nA alegria do Senhor e minha forca hoje\nMesmo na provacao, eu fico de pe, eu vivo\nTua palavra ilumina cada passo meu\nTu enches meu coracao da Tua alegria\n\n[Refrao]\nEu sou alegre, eu sou alegre\nA alegria do Senhor habita em mim\nEu sou alegre, eu sou alegre\nNa Tua presenca, meu coracao se alegra\n\n[Verso 2]\nTu me fazes conhecer o caminho da vida\nDiante da Tua face, a alegria cresce\nPrazeres eternos estao a Tua direita\nMinha alma exulta e lembra da Tua bondade\n\n[Ponte]\nMesmo se as lagrimas vierem por um tempo\nTua alegria volta como o sol nascente"},
-{n:2,i:"&#x2764;",f:"02_Curado",t:"Eu estou curado",v:"Isaias 53:5 ; 1 Pedro 2:24",l:"[Verso 1]\nEle levou nossas culpas, nossas dores tambem\nPelas suas feridas, eu sou curado\nNa cruz, Ele tomou tudo por mim\nHoje, Sua vida flui em mim\n\n[Refrao]\nEu estou curado em nome de Jesus\nEu estou curado pelo sangue derramado\nA cruz falou mais alto que a morte\nEu estou curado pelo amor do Senhor\n\n[Verso 2]\nEle levou meus pecados no madeiro\nPara que eu viva para Deus pela fe\nPelas suas feridas, recebi a vida\nHoje, a cura cresce em mim\n\n[Ponte]\nEle enviou Sua palavra\nE me curou completamente"},
-{n:3,i:"&#x1F4AA;",f:"03_Saude",t:"Eu tenho saude",v:"3 Joao 1:2",l:"[Verso 1]\nDesejo que te va bem em tudo\nE que tenhas saude\nAssim como tua alma vai bem\nE a promessa que Deus deu\n\n[Refrao]\nEu tenho saude, corpo e alma em paz\nO Senhor cuida de mim, dia apos dia\nEu tenho saude, fortalecido pela Sua bondade\nMinha vida pertence a Ele para sempre\n\n[Verso 2]\nE Ele quem renova minhas forcas\nComo a aguia, retomo meu voo"},
-{n:4,i:"&#x1F3C6;",f:"04_Vencedor",t:"Eu sou vencedor",v:"Romanos 8:37 ; 1 Joao 5:4",l:"[Verso 1]\nTudo o que nasce de Deus vence o mundo\nMinha fe me faz avancar\nA vitoria ja me foi dada\nNao tenho mais medo de enfrentar\n\n[Refrao]\nEu sou vencedor, mais que vencedor\nPor Aquele que me amou\nEu s
+{n:1,i:"\u{1F60A}",f:"01_Alegria",t:"Eu sou alegre",v:"Neemias 8:10 - Salmo 16:11",l:"[Verso 1]\nA alegria do Senhor e minha forca hoje\nMesmo na provacao, eu fico de pe, eu vivo\nTua palavra ilumina cada passo meu\nTu enches meu coracao da Tua alegria\n\n[Refrao]\nEu sou alegre, eu sou alegre\nA alegria do Senhor habita em mim\nEu sou alegre, eu sou alegre\nNa Tua presenca, meu coracao se alegra\n\n[Verso 2]\nTu me fazes conhecer o caminho da vida\nDiante da Tua face, a alegria cresce\nPrazeres eternos estao a Tua direita\nMinha alma exulta e lembra da Tua bondade"},
+{n:2,i:"\u2764",f:"02_Curado",t:"Eu estou curado",v:"Isaias 53:5 - 1 Pedro 2:24",l:"[Verso 1]\nEle levou nossas culpas, nossas dores tambem\nPelas suas feridas, eu sou curado\nNa cruz, Ele tomou tudo por mim\nHoje, Sua vida flui em mim\n\n[Refrao]\nEu estou curado em nome de Jesus\nEu estou curado pelo sangue derramado\nA cruz falou mais alto que a morte\nEu estou curado pelo amor do Senhor"},
+{n:3,i:"\u{1F4AA}",f:"03_Saude",t:"Eu tenho saude",v:"3 Joao 1:2",l:"[Verso 1]\nDesejo que te va bem em tudo\nE que tenhas saude\nAssim como tua alma vai bem\nE a promessa que Deus deu\n\n[Refrao]\nEu tenho saude, corpo e alma em paz\nO Senhor cuida de mim, dia apos dia\nEu tenho saude, fortalecido pela Sua bondade\nMinha vida pertence a Ele para sempre"},
+{n:4,i:"\u{1F3C6}",f:"04_Vencedor",t:"Eu sou vencedor",v:"Romanos 8:37 - 1 Joao 5:4",l:"[Verso 1]\nTudo o que nasce de Deus vence o mundo\nMinha fe me faz avancar\nA vitoria ja me foi dada\nNao tenho mais medo de enfrentar\n\n[Refrao]\nEu sou vencedor, mais que vencedor\nPor Aquele que me amou\nEu sou vencedor, mais que vencedor\nMinha vitoria vem do Senhor"},
+{n:5,i:"\u{1F331}",f:"05_Prospero",t:"Eu sou prospero",v:"Josue 1:8 - Salmo 1:3",l:"[Verso 1]\nQue este livro nao se aparte da minha boca\nEu o medito dia e noite\nEntao prospero nos meus caminhos\nE a bencao cresce em mim\n\n[Refrao]\nEu prospero, pela mao de Deus\nTudo o que faco da fruto\nEu prospero, sob Seus olhos\nMinha vida floresce dia e noite"},
+{n:6,i:"\u{1F64F}",f:"06_Grato",t:"Eu sou grato",v:"1 Tess. 5:18 - Salmo 100:4",l:"[Verso 1]\nEm tudo, dou gracas a Deus\nMesmo quando nao entendo\nMeu coracao escolhe confiar Nele\nPois Sua fidelidade nao falha\n\n[Refrao]\nEu sou grato, de todo meu coracao\nPelo Teu amor e Tua bondade\nEu sou grato, meu Senhor\nPara sempre Te louvarei"},
+{n:7,i:"\u2728",f:"07_Feliz",t:"Eu sou feliz",v:"Salmo 16:11",l:"[Verso 1]\nNa Tua presenca ha plenitude de alegria\nA Tua direita, felicidade eterna\nMinha alegria nao depende mais do mundo\nMas do Teu amor que vive em mim\n\n[Refrao]\nEu sou feliz, verdadeiramente feliz\nMinha alegria vem de Ti, Senhor Jesus\nEu sou feliz, verdadeiramente feliz\nMinha vida esta escondida em Deus"},
+{n:8,i:"\u{1F54A}",f:"08_Abencoado",t:"Eu sou abencoado",v:"Efesios 1:3 - Numeros 6:24-26",l:"[Verso 1]\nBendito seja o Deus que me abencoou em Cristo\nCom toda bencao nos lugares celestiais\nSua graca me envolve hoje\nE Sua luz se revela em mim\n\n[Refrao]\nEu sou abencoado, eu sou guardado\nO Senhor cuida dos meus passos\nEu sou abencoado, eu sou amado\nSua paz permanece em mim"},
+{n:9,i:"\u{1F932}",f:"09_Amem",t:"Assim seja (Amem)",v:"Mateus 6:13 - Apocalipse 22:20",l:"[Verso 1]\nQue a Tua vontade se cumpra\nNa terra como no ceu\nQue o Teu reino venha em nossas vidas\nNa paz eterna\n\n[Refrao]\nAmem, amem, assim seja\nA Ti a gloria para sempre\nAmem, amem, assim seja\nVem Senhor, reina sobre nos"},
+{n:10,i:"\u{1F54A}",f:"10_Shalom",t:"Paz do Senhor (Shalom)",v:"Joao 14:27 - Numeros 6:26",l:"[Verso 1]\nDeixo-vos a paz, a minha paz vos dou\nDiz o Senhor, cheio de amor\nNao e como o mundo pode dar\nE uma paz para sempre\n\n[Refrao]\nPaz do Senhor, paz de Adonai\nPaz que guarda meu coracao\nPaz do Senhor, paz de Adonai\nPaz que afasta o medo"}
+];
+var g=document.getElementById("grid");
+for(var i=0;i<C.length;i++){
+var c=C[i];
+var card=document.createElement("div");
+card.className="card";
+card.setAttribute("onclick","abrir("+c.n+")");
+card.innerHTML='<div class="icon">'+c.i+'</div><div class="num">Confissao '+c.n+'</div><div class="title">'+c.t+'</div><div class="verse">'+c.v+'</div>';
+g.appendChild(card);
+}
+function abrir(n){
+var c=C[n-1];
+document.getElementById("pt").textContent=c.t;
+document.getElementById("pv").textContent=c.v;
+document.getElementById("au").src=BASE+c.f+".mp3";
+document.getElementById("ly").textContent=c.l;
+document.getElementById("ly").classList.remove("show");
+document.querySelector(".btn-lyrics").textContent="Ver a letra";
+document.getElementById("popup").style.display="flex";
+document.getElementById("au").play();
+}
+function toggleLyrics(){
+var ly=document.getElementById("ly");
+var btn=document.querySelector(".btn-lyrics");
+if(ly.classList.contains("show")){
+ly.classList.remove("show");
+btn.textContent="Ver a letra";
+}else{
+ly.classList.add("show");
+btn.textContent="Esconder a letra";
+}
+}
+function fechar(){
+document.getElementById("popup").style.display="none";
+document.getElementById("au").pause();
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")fechar();});
+</script>
+</body>
+</html>
