@@ -1,377 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Confissoes da Biblia em Musica</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Merriweather', Georgia, serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #e8e8e8;
-        }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        header { text-align: center; margin-bottom: 30px; }
-        h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.5rem;
-            color: #ffd700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .subtitle { font-size: 1.1rem; color: #b8b8b8; font-style: italic; }
-        .confessions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .confession-card {
-            background: linear-gradient(145deg, #1e3a5f, #162d4a);
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            text-align: center;
-        }
-        .confession-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffd700;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-        }
-        .confession-icon { font-size: 2.5rem; margin-bottom: 15px; }
-        .confession-number {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 0.9rem;
-            color: #ffd700;
-            margin-bottom: 5px;
-        }
-        .confession-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.3rem;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-        .confession-verse { font-size: 0.85rem; color: #a0a0a0; font-style: italic; }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-        .back-link:hover { text-decoration: underline; }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #888;
-            font-size: 0.85rem;
-        }
-        /* POPUP STYLES */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        .popup-content {
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 20px;
-            border: 2px solid #ffd700;
-            position: relative;
-        }
-        .popup-close {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2rem;
-            color: #ffd700;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        .popup-close:hover { color: #fff; }
-        .popup-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.8rem;
-            color: #ffd700;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        .popup-verse {
-            text-align: center;
-            color: #a0a0a0;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        .popup-player {
-            background: linear-gradient(145deg, #0d1b2a, #1b263b);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .popup-player audio { width: 100%; max-width: 500px; }
-        .lyrics-container {
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .lyrics-section { margin-bottom: 15px; }
-        .lyrics-label {
-            color: #ffd700;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-        .lyrics-text {
-            color: #e8e8e8;
-            line-height: 1.8;
-            white-space: pre-line;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Confissoes da Biblia em Musica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);min-height:100vh;color:#e8e8e8;font-family:'Merriweather',Georgia,serif}
+.container{max-width:950px;margin:0 auto;padding:40px 20px}
+header{text-align:center;margin-bottom:40px}
+h1{font-family:'Playfair Display',serif;font-size:2.8rem;color:#ffd700;margin-bottom:15px}
+.subtitle{font-size:1.1rem;color:#b8b8b8;font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:40px}
+.card{background:linear-gradient(145deg,#1e3a5f,#162d4a);border-radius:15px;padding:30px 20px;cursor:pointer;transition:all .3s ease;border:2px solid transparent;text-align:center}
+.card:hover{transform:translateY(-5px);border-color:#ffd700;box-shadow:0 10px 30px rgba(255,215,0,0.2)}
+.icon{font-size:2.5rem;margin-bottom:15px}
+.num{font-family:'Playfair Display',serif;font-size:0.95rem;color:#ffd700;margin-bottom:8px}
+.title{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;margin-bottom:10px}
+.verse{font-size:0.85rem;color:#a0a0a0;font-style:italic}
+.links{text-align:center;margin:30px 0}
+.links a{color:#ffd700;text-decoration:none;margin:0 15px;font-size:0.95rem}
+.links a:hover{text-decoration:underline}
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #333;color:#888;font-size:0.85rem}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.popup-box{background:linear-gradient(145deg,#1a1a2e,#16213e);padding:30px;border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow:auto;position:relative;border:2px solid #ffd700}
+.close{position:absolute;top:15px;right:20px;font-size:2rem;background:none;border:none;color:#ffd700;cursor:pointer}
+.close:hover{color:#fff}
+.popup h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:#ffd700;text-align:center;margin-bottom:10px}
+.popup .pv{color:#a0a0a0;text-align:center;font-style:italic;margin-bottom:20px}
+.player{background:linear-gradient(145deg,#0d1b2a,#1b263b);border-radius:15px;padding:20px;margin-bottom:20px}
+.player audio{width:100%}
+.btn-lyrics{display:block;width:100%;padding:15px;background:#ffd700;color:#1a1a2e;border:none;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:bold;margin-bottom:15px}
+.btn-lyrics:hover{background:#ffed4a}
+.lyrics{background:rgba(0,0,0,0.3);border-radius:10px;padding:25px;line-height:1.9;white-space:pre-line;color:#e8e8e8;display:none}
+.lyrics.show{display:block}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>10 Confissoes da Biblia em Musica</h1>
-            <p class="subtitle">Declare a Palavra de Deus sobre sua vida</p>
-        </header>
+<div class="container">
+<header>
+<h1>10 Confissoes da Biblia em Musica</h1>
+<p class="subtitle">Declare a Palavra de Deus sobre sua vida</p>
+</header>
+<div class="grid" id="grid"></div>
+<div class="links">
+<a href="index.html">Voltar para Biblia Cantada</a> |
+<a href="promessas.html">Promessas da Biblia</a>
+</div>
+<footer>2025 Biblia Cantada - Stephane Cassani</footer>
+</div>
 
-        <div class="confessions-grid">
-            <div class="confession-card" onclick="openPopup(1)">
-                <div class="confession-icon">&#x1F60A;</div>
-                <div class="confession-number">Confissao 1</div>
-                <div class="confession-title">Eu sou alegre</div>
-                <div class="confession-verse">Neemias 8:10 &bull; Salmo 16:11</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(2)">
-                <div class="confession-icon">&#x2764;</div>
-                <div class="confession-number">Confissao 2</div>
-                <div class="confession-title">Eu estou curado</div>
-                <div class="confession-verse">Isaias 53:5 &bull; 1 Pedro 2:24</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(3)">
-                <div class="confession-icon">&#x1F4AA;</div>
-                <div class="confession-number">Confissao 3</div>
-                <div class="confession-title">Eu tenho saude</div>
-                <div class="confession-verse">3 Joao 1:2</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(4)">
-                <div class="confession-icon">&#x1F3C6;</div>
-                <div class="confession-number">Confissao 4</div>
-                <div class="confession-title">Eu sou vencedor</div>
-                <div class="confession-verse">Romanos 8:37 &bull; 1 Joao 5:4</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(5)">
-                <div class="confession-icon">&#x1F331;</div>
-                <div class="confession-number">Confissao 5</div>
-                <div class="confession-title">Eu sou prospero</div>
-                <div class="confession-verse">Josue 1:8 &bull; Salmo 1:3</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(6)">
-                <div class="confession-icon">&#x1F64F;</div>
-                <div class="confession-number">Confissao 6</div>
-                <div class="confession-title">Eu sou grato</div>
-                <div class="confession-verse">1 Tess. 5:18 &bull; Salmo 100:4</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(7)">
-                <div class="confession-icon">&#x2728;</div>
-                <div class="confession-number">Confissao 7</div>
-                <div class="confession-title">Eu sou feliz</div>
-                <div class="confession-verse">Salmo 16:11</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(8)">
-                <div class="confession-icon">&#x1F54A;</div>
-                <div class="confession-number">Confissao 8</div>
-                <div class="confession-title">Eu sou abencoado</div>
-                <div class="confession-verse">Efesios 1:3 &bull; Numeros 6:24-26</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(9)">
-                <div class="confession-icon">&#x1F932;</div>
-                <div class="confession-number">Confissao 9</div>
-                <div class="confession-title">Amem, assim seja</div>
-                <div class="confession-verse">Mateus 6:13 &bull; Apocalipse 22:20</div>
-            </div>
-            <div class="confession-card" onclick="openPopup(10)">
-                <div class="confession-icon">&#x1F54A;</div>
-                <div class="confession-number">Confissao 10</div>
-                <div class="confession-title">Shalom Adonai</div>
-                <div class="confession-verse">Joao 14:27 &bull; Numeros 6:26</div>
-            </div>
-        </div>
+<div class="popup" id="popup">
+<div class="popup-box">
+<button class="close" onclick="fermer()">X</button>
+<h2 id="pt"></h2>
+<p class="pv" id="pv"></p>
+<div class="player"><audio controls id="au"></audio></div>
+<button class="btn-lyrics" onclick="toggleLyrics()">Ver a letra</button>
+<div class="lyrics" id="ly"></div>
+</div>
+</div>
 
-        <div style="text-align: center;">
-            <a href="index.html" class="back-link">&larr; Voltar para Biblia Cantada</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="promessas.html" class="back-link">Promessas da Biblia &rarr;</a>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 Biblia Cantada - Stephane Cassani</p>
-        </footer>
-    </div>
-
-    <!-- POPUP -->
-    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
-        <div class="popup-content" onclick="event.stopPropagation()">
-            <button class="popup-close" onclick="closePopup()">&times;</button>
-            <h2 class="popup-title" id="popupTitle"></h2>
-            <p class="popup-verse" id="popupVerse"></p>
-            <div class="popup-player">
-                <audio id="audio" controls></audio>
-            </div>
-            <div class="lyrics-container" id="lyricsContainer"></div>
-        </div>
-    </div>
-
-    <script>
-        const ARCHIVE_BASE = "https://archive.org/download/confissoes-biblia-cantada-v2";
-        
-        const confessions = [
-            {
-                num: 1, file: "Alegria", title: "Eu sou alegre",
-                verse: "Neemias 8:10 ; Salmo 16:11",
-                lyrics: [
-                    { label: "Verso 1", text: "A alegria do Senhor e a minha forca\nMesmo na luta eu continuo a andar\nA Tua Palavra ilumina meus passos\nE a Tua alegria vem me levantar" },
-                    { label: "Refrrao", text: "Eu sou alegre, eu sou alegre\nA alegria do Senhor vive em mim\nEu sou alegre, eu sou alegre\nNa Tua presenca ha alegria sem fim" },
-                    { label: "Verso 2", text: "Tu me mostras o caminho da vida\nNa Tua face ha prazer sem fim\nA Tua direita ha delicias eternas\nMinha alma danca diante de Ti" },
-                    { label: "Ponte", text: "O choro pode durar uma noite\nMas a alegria vem pela manha" }
-                ]
-            },
-            {
-                num: 2, file: "Curado", title: "Eu estou curado",
-                verse: "Isaias 53:5 ; 1 Pedro 2:24",
-                lyrics: [
-                    { label: "Verso 1", text: "Pelas Suas pisaduras fui sarado\nNa cruz Jesus levou minha dor\nIsaias proclamou a verdade\nHoje a cura vive em mim, Senhor" },
-                    { label: "Refrao", text: "Eu estou curado, em nome de Jesus\nEu estou curado, pelo poder da cruz\nO sangue falou mais alto que a dor\nEu estou curado pelo amor do Senhor" },
-                    { label: "Verso 2", text: "Pedro diz que eu ja fui curado\nPelo sacrificio la na cruz\nNao vivo mais pelo que eu sinto\nMas pela verdade de Jesus" },
-                    { label: "Ponte", text: "Ele enviou a Sua Palavra\nE me sarou por completo" }
-                ]
-            },
-            {
-                num: 3, file: "Saude", title: "Eu tenho saude",
-                verse: "3 Joao 1:2",
-                lyrics: [
-                    { label: "Verso 1", text: "Acima de tudo eu desejo\nQue prosperes e tenhas saude\nAssim como vai bem a tua alma\nEssa e a vontade de Deus" },
-                    { label: "Refrao", text: "Eu tenho saude, corpo e alma em paz\nO Senhor cuida de mim sempre mais\nEu tenho saude, forca e vida\nMinha existencia esta em Deus protegida" },
-                    { label: "Verso 2", text: "O Senhor renova as minhas forcas\nComo a aguia eu volto a voar" }
-                ]
-            },
-            {
-                num: 4, file: "Vencedor", title: "Eu sou vencedor",
-                verse: "Romanos 8:37 ; 1 Joao 5:4",
-                lyrics: [
-                    { label: "Verso 1", text: "Tudo o que e nascido de Deus vence o mundo\nEssa vitoria e minha fe\nMesmo no meio da batalha\nEu sei que de pe eu ficarei" },
-                    { label: "Refrao", text: "Eu sou vencedor, mais que vencedor\nPor Aquele que me amou\nEu sou vencedor, mais que vencedor\nMinha vitoria vem do Senhor" },
-                    { label: "Verso 2", text: "Nada pode me separar do Seu amor\nNem a vida, nem a morte\nEm todas as coisas eu sou vencedor\nNa forca do Seu nome forte" },
-                    { label: "Ponte", text: "Se Deus e por mim, quem sera contra mim?" }
-                ]
-            },
-            {
-                num: 5, file: "Prospero", title: "Eu sou prospero",
-                verse: "Josue 1:8 ; Salmo 1:3",
-                lyrics: [
-                    { label: "Verso 1", text: "Este livro nao sai da minha boca\nEu medito dia e noite, sim\nEntao prospera o meu caminho\nE o sucesso nasce em mim" },
-                    { label: "Refrao", text: "Eu sou prospero, pelo Senhor\nTudo que faco vai prosperar\nEu sou prospero, pela Palavra\nMeu futuro Ele vai abencoar" },
-                    { label: "Verso 2", text: "Sou como arvore junto as aguas\nSalmo um comeca a florescer\nDou fruto no tempo certo\nTudo o que faco vai crescer" }
-                ]
-            },
-            {
-                num: 6, file: "Grato", title: "Eu sou grato",
-                verse: "1 Tessalonicenses 5:18 ; Salmo 100:4",
-                lyrics: [
-                    { label: "Verso 1", text: "Em tudo eu dou gracas a Deus\nMesmo quando nao entendo\nMeu coracao escolhe confiar\nPois Sua fidelidade e eterna" },
-                    { label: "Refrao", text: "Eu sou grato, eu sou grato\nPor tudo que o Senhor me deu\nEu sou grato, eu sou grato\nPara sempre agradecerei a Deus" },
-                    { label: "Verso 2", text: "Entro em Sua casa com louvor\nCom acoes de gracas e cancao" }
-                ]
-            },
-            {
-                num: 7, file: "Feliz", title: "Eu sou feliz",
-                verse: "Salmo 16:11",
-                lyrics: [
-                    { label: "Verso 1", text: "Na Tua presenca ha plenitude de alegria\nDelicias eternas a Tua direita\nMinha felicidade vem do ceu\nNao do que o mundo oferece" },
-                    { label: "Refrao", text: "Eu sou feliz, verdadeiramente feliz\nMinha alegria vem do Senhor\nEu sou feliz, verdadeiramente feliz\nMinha vida esta no amor de Deus" },
-                    { label: "Verso 2", text: "Mesmo quando a tristeza tenta vir\nA Tua alegria volta a surgir" }
-                ]
-            },
-            {
-                num: 8, file: "Abencoado", title: "Eu sou abencoado",
-                verse: "Efesios 1:3 ; Numeros 6:24-26",
-                lyrics: [
-                    { label: "Verso 1", text: "Bendito seja Deus que ja me abencoou\nCom toda bencao espiritual\nSua graca me envolve hoje\nE Sua luz vive em mim" },
-                    { label: "Refrao", text: "Eu sou abencoado, eu sou guardado\nO Senhor cuida dos meus passos\nEu sou abencoado, eu sou amado\nSua paz mora em meu abraco" },
-                    { label: "Verso 2", text: "O Senhor me abencoe e me guarde\nFaca o Seu rosto brilhar sobre mim" }
-                ]
-            },
-            {
-                num: 9, file: "Amem", title: "Amem, assim seja",
-                verse: "Mateus 6:13 ; Apocalipse 22:20",
-                lyrics: [
-                    { label: "Verso 1", text: "Seja feita a Tua vontade\nNa terra como e no ceu\nVenha o Teu reino sobre nos\nCom poder eterno, fiel" },
-                    { label: "Refrao", text: "Amem, amem, assim seja\nTudo esta em Tuas maos\nAmem, amem, assim seja\nVem Senhor, reinar em nos" },
-                    { label: "Verso 2", text: "Sim, vem Senhor Jesus\nMeu coracao Te espera em fe" }
-                ]
-            },
-            {
-                num: 10, file: "Shalom", title: "Shalom Adonai",
-                verse: "Joao 14:27 ; Numeros 6:26",
-                lyrics: [
-                    { label: "Verso 1", text: "Eu vos deixo a paz, Eu vos dou a Minha paz\nDisse Jesus em amor\nNao e como o mundo sabe dar\nE paz que vence a dor" },
-                    { label: "Refrao", text: "Shalom Adonai, Shalom Adonai\nPaz que guarda meu coracao\nShalom Adonai, Shalom Adonai\nPaz que enche a minha cancao" },
-                    { label: "Verso 2", text: "Que o Senhor volte o Seu rosto para mim\nE me conceda a Sua paz" }
-                ]
-            }
-        ];
-
-        function openPopup(num) {
-            const c = confessions[num - 1];
-            const numPad = String(num).padStart(2, '0');
-            const url = ARCHIVE_BASE + '/' + numPad + '_' + c.file + '.mp3';
-            
-            document.getElementById('popupTitle').innerHTML = c.title;
-            document.getElementById('popupVerse').innerHTML = c.verse;
-            
-            const audio = document.getElementById('audio');
-            audio.src = url;
-            audio.play();
-            
-            let lyricsHTML = '';
-            c.lyrics.forEach(function(section) {
-                lyricsHTML += '<div class="lyrics-section">';
-                lyricsHTML += '<div class="lyrics-label">[' + section.label + ']</div>';
-                lyricsHTML += '<div class="lyrics-text">' + section.text + '</div>';
-                lyricsHTML += '</div>';
-            });
-            document.getElementById('lyricsContainer').innerHTML = lyricsHTML;
-            
-            document.getElementById('popup').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePopup(event) {
-            if (event && event.target !== document.getElementById('popup')) return;
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('audio').pause();
-            document.body.style.overflow = 'auto';
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closePopup();
-        });
-    </script>
-</body>
-</html>
+<script>
+var BASE="https://archive.org/download/confissoes-biblia-cantada-v2/";
+var C=[
+{n:1,i:"&#x1F60A;",f:"01_Alegria",t:"Eu sou alegre",v:"Neemias 8:10 ; Salmo 16:11",l:"[Verso 1]\nA alegria do Senhor e minha forca hoje\nMesmo na provacao, eu fico de pe, eu vivo\nTua palavra ilumina cada passo meu\nTu enches meu coracao da Tua alegria\n\n[Refrao]\nEu sou alegre, eu sou alegre\nA alegria do Senhor habita em mim\nEu sou alegre, eu sou alegre\nNa Tua presenca, meu coracao se alegra\n\n[Verso 2]\nTu me fazes conhecer o caminho da vida\nDiante da Tua face, a alegria cresce\nPrazeres eternos estao a Tua direita\nMinha alma exulta e lembra da Tua bondade\n\n[Ponte]\nMesmo se as lagrimas vierem por um tempo\nTua alegria volta como o sol nascente"},
+{n:2,i:"&#x2764;",f:"02_Curado",t:"Eu estou curado",v:"Isaias 53:5 ; 1 Pedro 2:24",l:"[Verso 1]\nEle levou nossas culpas, nossas dores tambem\nPelas suas feridas, eu sou curado\nNa cruz, Ele tomou tudo por mim\nHoje, Sua vida flui em mim\n\n[Refrao]\nEu estou curado em nome de Jesus\nEu estou curado pelo sangue derramado\nA cruz falou mais alto que a morte\nEu estou curado pelo amor do Senhor\n\n[Verso 2]\nEle levou meus pecados no madeiro\nPara que eu viva para Deus pela fe\nPelas suas feridas, recebi a vida\nHoje, a cura cresce em mim\n\n[Ponte]\nEle enviou Sua palavra\nE me curou completamente"},
+{n:3,i:"&#x1F4AA;",f:"03_Saude",t:"Eu tenho saude",v:"3 Joao 1:2",l:"[Verso 1]\nDesejo que te va bem em tudo\nE que tenhas saude\nAssim como tua alma vai bem\nE a promessa que Deus deu\n\n[Refrao]\nEu tenho saude, corpo e alma em paz\nO Senhor cuida de mim, dia apos dia\nEu tenho saude, fortalecido pela Sua bondade\nMinha vida pertence a Ele para sempre\n\n[Verso 2]\nE Ele quem renova minhas forcas\nComo a aguia, retomo meu voo"},
+{n:4,i:"&#x1F3C6;",f:"04_Vencedor",t:"Eu sou vencedor",v:"Romanos 8:37 ; 1 Joao 5:4",l:"[Verso 1]\nTudo o que nasce de Deus vence o mundo\nMinha fe me faz avancar\nA vitoria ja me foi dada\nNao tenho mais medo de enfrentar\n\n[Refrao]\nEu sou vencedor, mais que vencedor\nPor Aquele que me amou\nEu s
