@@ -312,7 +312,7 @@
             const key = currentBook + "_" + fileName + "_" + chapterNum;
             const fileId = driveMapping[key];
             if (fileId) {
-                const url = "https://drive.google.com/uc?export=download&id=" + fileId;
+                const url = "https://docs.google.com/uc?export=open&id=" + fileId;
                 const audio = document.getElementById('audio');
                 audio.src = url;
                 audio.play();
