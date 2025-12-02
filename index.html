@@ -340,10 +340,7 @@
             const book = books.find(b => b.num === currentBook);
             if (currentChapter < book.chapters) playChapter(currentChapter + 1);
         });
-        document.getElementById('audio').addEventListener('ended', () => {
-            const book = books.find(b => b.num === currentBook);
-            if (currentChapter < book.chapters) playChapter(currentChapter + 1);
-        });
+        // Auto-next disabled with iframe
         
         renderBooks('old-testament', oldTestament);
         renderBooks('new-testament', newTestament);
