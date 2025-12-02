@@ -127,8 +127,8 @@
             <h1>Biblia Cantada</h1>
             <p class="subtitle">A Palavra de Deus em musica worship portuguesa</p>
             <div class="stats">
-                <span id="available-count">27</span> livros disponiveis de 66 |
-                <span id="chapters-count">40</span> capitulos
+                <span id="available-count">33</span> livros disponiveis de 66 |
+                <span id="chapters-count">50</span> capitulos
             </div>
         </header>
         <h2 class="section-title">Antigo Testamento</h2>
@@ -220,7 +220,18 @@
             "62_1Joao_01": "1uxdcy4h91Pn-23RcK-SNK6QI4u784McO",
             "63_2Joao_01": "1ED5Ivh3Xo3DdVeeEEmyUenbuy_1Ifr0W",
             "64_3Joao_01": "1RhV-VgajVL9MnJlb6AINf8JEqR4Wq8Sr",
-            "65_Judas_01": "1ogDN0VFjFqSSoWjN2xQAUeawvUAmdxjZ"
+            "65_Judas_01": "1ogDN0VFjFqSSoWjN2xQAUeawvUAmdxjZ",
+            "40_Mateus_01": "1qn5vFQhsCXQtQ_m_JAoY2j4Y2mshBo3o",
+            "41_Marcos_01": "1GIA0bduitgdUAcaxHfjTUwPpBqjNZuD5",
+            "42_Lucas_01": "13ur5IMfGx08PZDWbaGBwl8YlP-i_N0ZX",
+            "43_Joao_01": "1Ofdb_vQm9xlxHQtdD1fmFP9xN-LDfqC0",
+            "43_Joao_02": "1v2JQul4Be4640AOBYlP9gIBq7_0A-aV9",
+            "44_Atos_01": "1FqcrJKbjkC1Iyj8ZFUDaE3UjtCgX4fns",
+            "44_Atos_02": "1xIavhoNVFTag72Vn3sA3Iqbp5IjuOYJ-",
+            "44_Atos_03": "15itpGpki06ME6Gt1zThZzj7oc-04D6qP",
+            "66_Apocalipse_01": "1BN8AmVI90_CBBmOJHEmI-sBfADwf_jrb",
+            "66_Apocalipse_02": "1Uzapv-7gsBRZHgtiWWHAZu8gJZ05RMKk",
+            "66_Apocalipse_03": "1jptSY4_c1dFeY8O3BJnkuz6_2iBtTeds",
         };
 
         const fileNames = {
@@ -251,7 +262,13 @@
             "62": "1Joao",
             "63": "2Joao",
             "64": "3Joao",
-            "65": "Judas"
+            "65": "Judas",
+            "40": "Mateus",
+            "41": "Marcos",
+            "42": "Lucas",
+            "43": "Joao",
+            "44": "Atos",
+            "66": "Apocalipse"
         };
         const books = [
             { num: "01", name: "Genesis", chapters: 1, available: true },
@@ -293,11 +310,11 @@
             { num: "37", name: "Ageu", chapters: 2, available: false },
             { num: "38", name: "Zacarias", chapters: 14, available: false },
             { num: "39", name: "Malaquias", chapters: 4, available: false },
-            { num: "40", name: "Mateus", chapters: 28, available: false },
-            { num: "41", name: "Marcos", chapters: 16, available: false },
-            { num: "42", name: "Lucas", chapters: 24, available: false },
-            { num: "43", name: "Joao", chapters: 21, available: false },
-            { num: "44", name: "Atos", chapters: 28, available: false },
+            { num: "40", name: "Mateus", chapters: 1, available: true },
+            { num: "41", name: "Marcos", chapters: 1, available: true },
+            { num: "42", name: "Lucas", chapters: 1, available: true },
+            { num: "43", name: "Joao", chapters: 2, available: true },
+            { num: "44", name: "Atos", chapters: 3, available: true },
             { num: "45", name: "Romanos", chapters: 1, available: true },
             { num: "46", name: "1 Corintios", chapters: 1, available: true },
             { num: "47", name: "2 Corintios", chapters: 1, available: true },
@@ -319,7 +336,7 @@
             { num: "63", name: "2 Joao", chapters: 1, available: true },
             { num: "64", name: "3 Joao", chapters: 1, available: true },
             { num: "65", name: "Judas", chapters: 1, available: true },
-            { num: "66", name: "Apocalipse", chapters: 22, available: false }
+            { num: "66", name: "Apocalipse", chapters: 3, available: true }
         ];
         const oldTestament = books.filter(b => parseInt(b.num) <= 39);
         const newTestament = books.filter(b => parseInt(b.num) > 39);
