@@ -1,190 +1,356 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B&iacute;blia Cantada - 66 Livros em &Aacute;udio</title>
+    <title>Biblia Cantada - Worship Portugues</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
+        body {
+            font-family: 'Merriweather', Georgia, serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh; color: #fff; padding: 20px;
+            min-height: 100vh;
+            color: #fff;
         }
-        h1 { text-align: center; margin: 20px 0; font-size: 2.5em; color: #ffd700; }
-        .stats { text-align: center; margin-bottom: 30px; color: #aaa; }
-        .container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
-            gap: 10px; max-width: 1200px; margin: 0 auto;
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
         }
-        .book { 
-            background: linear-gradient(145deg, #2d2d44 0%, #1f1f2e 100%);
-            border-radius: 10px; padding: 15px 10px; text-align: center;
-            cursor: pointer; transition: all 0.3s ease;
-            border: 2px solid transparent;
+        h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 2.5em; margin-bottom: 10px; color: #e94560; }
+        .subtitle { color: #aaa; font-size: 1.1em; }
+        .stats {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: inline-block;
         }
-        .book:hover { transform: translateY(-5px); border-color: #ffd700; }
-        .book.available { background: linear-gradient(145deg, #1e5631 0%, #143d22 100%); }
-        .book.unavailable { opacity: 0.4; cursor: not-allowed; }
-        .book-num { font-size: 0.8em; color: #888; }
-        .book-name { font-size: 1em; margin-top: 5px; font-weight: bold; }
-        .modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000;
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.3em;
+            color: #e94560;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(233, 69, 96, 0.3);
         }
-        .modal.active { display: flex; }
-        .modal-content { 
-            background: #2d2d44; padding: 30px; border-radius: 15px; 
-            max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
         }
-        .modal h2 { color: #ffd700; margin-bottom: 20px; }
-        .modal-file { 
-            padding: 15px; margin: 10px 0; background: #1f1f2e; 
-            border-radius: 8px; cursor: pointer; transition: background 0.3s;
+        .book {
+            background: rgba(233, 69, 96, 0.2);
+            border: 2px solid rgba(233, 69, 96, 0.5);
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .modal-file:hover { background: #3d3d5c; }
-        .close-btn { float: right; font-size: 1.5em; cursor: pointer; color: #888; }
-        .close-btn:hover { color: #fff; }
-        #player { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: #0d0d1a; padding: 15px; text-align: center;
+        .book:hover { 
+            background: rgba(233, 69, 96, 0.4); 
+            border-color: #e94560;
+            transform: translateY(-2px); 
         }
-        #player audio { width: 100%; max-width: 600px; }
-        #player-title { color: #ffd700; margin-bottom: 10px; }
+        .book.unavailable {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .book.unavailable:hover { 
+            transform: none; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .book.playing { 
+            background: rgba(233, 69, 96, 0.6); 
+            border-color: #e94560;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        .book-num { font-size: 0.75em; color: #ddd; margin-bottom: 5px; }
+        .book-name { font-size: 0.95em; font-weight: 500; }
+        .player-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, #1a1a2e, rgba(26, 26, 46, 0.98));
+            padding: 15px 20px;
+            display: none;
+            border-top: 1px solid rgba(233, 69, 96, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .player-container.active { display: block; }
+        .player-info { text-align: center; margin-bottom: 10px; }
+        .player-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2em; color: #e94560; }
+        .player-controls { display: flex; align-items: center; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        audio { width: 100%; max-width: 500px; }
+        .nav-btn {
+            background: #e94560;
+            border: none;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .nav-btn:hover { background: #ff6b6b; }
+        .nav-btn:disabled { background: #444; cursor: not-allowed; }
+        .chapter-select { padding: 8px; border-radius: 5px; background: #333; color: #fff; border: 1px solid #555; }
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 180px;
+        }
+        footer a { color: #e94560; text-decoration: none; }
+        @media (max-width: 600px) {
+            .books-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            .book { padding: 10px 5px; }
+            .book-name { font-size: 0.85em; }
+            h1 { font-size: 1.8em; }
+            footer { margin-bottom: 250px; }
+        }
     </style>
 </head>
 <body>
-    <h1>B&iacute;blia Cantada</h1>
-    <div class="stats">66 Livros da B&iacute;blia em &Aacute;udio | 159 arquivos MP3 | 38 livros dispon&iacute;veis</div>
-    <div class="container" id="books"></div>
-    
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-files"></div>
+    <div class="container">
+        <header>
+            <h1>Biblia Cantada</h1>
+            <p class="subtitle">A Palavra de Deus em musica worship portuguesa</p>
+            <div class="stats">
+                <span id="available-count">1</span> livro disponivel de 66 |
+                <span id="chapters-count">40</span> capitulos
+            </div>
+        </header>
+        <h2 class="section-title">Antigo Testamento</h2>
+        <div class="books-grid" id="old-testament"></div>
+        <h2 class="section-title">Novo Testamento</h2>
+        <div class="books-grid" id="new-testament"></div>
+        <footer>
+            <p>2025 Biblia Cantada - Stephane Cassani</p>
+            <p>Letras poeticas originais | Musica gerada por IA</p>
+            <p><a href="https://drive.google.com/drive/folders/BibliaCantada" target="_blank">Google Drive</a></p>
+        </footer>
+    </div>
+    <div class="player-container" id="player">
+        <div class="player-info">
+            <span class="player-title" id="player-title">-</span>
+        </div>
+        <div class="player-controls">
+            <button class="nav-btn" id="prev-btn">Anterior</button>
+            <select class="chapter-select" id="chapter-select"></select>
+            <button class="nav-btn" id="next-btn">Proximo</button>
+        </div>
+        <div class="player-controls" style="margin-top: 10px;">
+            <audio id="audio" controls></audio>
         </div>
     </div>
-    
-    <div id="player" style="display:none;">
-        <div id="player-title"></div>
-        <audio id="audio" controls></audio>
-    </div>
-
     <script>
-        const ARCHIVE_URL = 'https://archive.org/download/biblia-cantada/';
-        const BOOKS = [
-  {n:1,name:'Genesis',files:[{name:'Genesis',file:'01_Genesis.mp3'}]},
-  {n:2,name:'Exodo',files:[{name:'Exodo 01',file:'02_Exodo_01.mp3'},{name:'Exodo 02',file:'02_Exodo_02.mp3'},{name:'Exodo 03',file:'02_Exodo_03.mp3'},{name:'Exodo 04',file:'02_Exodo_04.mp3'},{name:'Exodo 05',file:'02_Exodo_05.mp3'},{name:'Exodo 06',file:'02_Exodo_06.mp3'},{name:'Exodo 07',file:'02_Exodo_07.mp3'},{name:'Exodo 08',file:'02_Exodo_08.mp3'},{name:'Exodo 09',file:'02_Exodo_09.mp3'},{name:'Exodo 10',file:'02_Exodo_10.mp3'},{name:'Exodo 11',file:'02_Exodo_11.mp3'},{name:'Exodo 12',file:'02_Exodo_12.mp3'},{name:'Exodo 13',file:'02_Exodo_13.mp3'},{name:'Exodo 14',file:'02_Exodo_14.mp3'},{name:'Exodo 15',file:'02_Exodo_15.mp3'},{name:'Exodo 16',file:'02_Exodo_16.mp3'},{name:'Exodo 17',file:'02_Exodo_17.mp3'},{name:'Exodo 18',file:'02_Exodo_18.mp3'},{name:'Exodo 19',file:'02_Exodo_19.mp3'},{name:'Exodo 20',file:'02_Exodo_20.mp3'},{name:'Exodo 21',file:'02_Exodo_21.mp3'},{name:'Exodo 22',file:'02_Exodo_22.mp3'},{name:'Exodo 23',file:'02_Exodo_23.mp3'},{name:'Exodo 24',file:'02_Exodo_24.mp3'},{name:'Exodo 25',file:'02_Exodo_25.mp3'},{name:'Exodo 26',file:'02_Exodo_26.mp3'},{name:'Exodo 27',file:'02_Exodo_27.mp3'},{name:'Exodo 28',file:'02_Exodo_28.mp3'},{name:'Exodo 29',file:'02_Exodo_29.mp3'},{name:'Exodo 30',file:'02_Exodo_30.mp3'},{name:'Exodo 31',file:'02_Exodo_31.mp3'},{name:'Exodo 32',file:'02_Exodo_32.mp3'},{name:'Exodo 33',file:'02_Exodo_33.mp3'},{name:'Exodo 34',file:'02_Exodo_34.mp3'},{name:'Exodo 35',file:'02_Exodo_35.mp3'},{name:'Exodo 36',file:'02_Exodo_36.mp3'},{name:'Exodo 37',file:'02_Exodo_37.mp3'},{name:'Exodo 38',file:'02_Exodo_38.mp3'},{name:'Exodo 39',file:'02_Exodo_39.mp3'},{name:'Exodo 40',file:'02_Exodo_40.mp3'}]},
-  {n:3,name:'Levitico'},
-  {n:4,name:'Numeros'},
-  {n:5,name:'Deuteronomio'},
-  {n:6,name:'Josue',files:[{name:'Josue',file:'06_Josue.mp3'},{name:'Josue louvores do livro de',file:'06_Josue_louvores_do_livro_de.mp3'}]},
-  {n:7,name:'Juizes'},
-  {n:8,name:'Rute',files:[{name:'Rute',file:'08_Rute.mp3'},{name:'Rute bblia cantada louvor',file:'08_Rute_bblia_cantada_louvor.mp3'},{name:'Rute byblia cantada louvo',file:'08_Rute_byblia_cantada_louvo.mp3'}]},
-  {n:9,name:'1 Samuel'},
-  {n:10,name:'2 Samuel'},
-  {n:11,name:'1 Reis'},
-  {n:12,name:'2 Reis'},
-  {n:13,name:'1 Cronicas'},
-  {n:14,name:'2 Cronicas'},
-  {n:15,name:'Esdras'},
-  {n:16,name:'Neemias',files:[{name:'Neemias',file:'16_Neemias.mp3'}]},
-  {n:17,name:'Ester'},
-  {n:18,name:'Jo',files:[{name:'Jo',file:'18_Jo.mp3'},{name:'Jo 1 2 e 3 cartas de o ',file:'18_Jo_1_2_e_3_cartas_de_o_.mp3'},{name:'Jo Parte1',file:'18_Jo_Parte1.mp3'},{name:'Jo Parte2',file:'18_Jo_Parte2.mp3'},{name:'Jo primeira carta de o ',file:'18_Jo_primeira_carta_de_o_.mp3'},{name:'Jo segunda carta de o b',file:'18_Jo_segunda_carta_de_o_b.mp3'},{name:'Jo terceira carta de o ',file:'18_Jo_terceira_carta_de_o_.mp3'}]},
-  {n:19,name:'Salmos',files:[{name:'Salmos',file:'19_Salmos.mp3'},{name:'Salmos 1 hora dos melhores ',file:'19_Salmos_1_hora_dos_melhores_.mp3'},{name:'Salmos 1h07',file:'19_Salmos_1h07.mp3'},{name:'Salmos 91',file:'19_Salmos_91.mp3'},{name:'Salmos Adoracao',file:'19_Salmos_Adoracao.mp3'},{name:'Salmos cantados para adorao',file:'19_Salmos_cantados_para_adorao.mp3'},{name:'Salmos cantados para aument',file:'19_Salmos_cantados_para_aument.mp3'},{name:'Salmos clamor por justia  q',file:'19_Salmos_clamor_por_justia__q.mp3'},{name:'Salmos deus reina sobre as ',file:'19_Salmos_deus_reina_sobre_as_.mp3'},{name:'Salmos em forma de cano uma',file:'19_Salmos_em_forma_de_cano_uma.mp3'},{name:'Salmos em forma de canoo um',file:'19_Salmos_em_forma_de_canoo_um.mp3'},{name:'Salmos o arrependimento e a',file:'19_Salmos_o_arrependimento_e_a.mp3'},{name:'Salmos OrarComPoder',file:'19_Salmos_OrarComPoder.mp3'},{name:'Salmos OrarComPoder v2',file:'19_Salmos_OrarComPoder_v2.mp3'},{name:'Salmos Paz',file:'19_Salmos_Paz.mp3'}]},
-  {n:20,name:'Proverbios',files:[{name:'Proverbios',file:'20_Proverbios.mp3'}]},
-  {n:21,name:'Eclesiastes',files:[{name:'Eclesiastes',file:'21_Eclesiastes.mp3'},{name:'Eclesiastes bblia cantada com',file:'21_Eclesiastes_bblia_cantada_com.mp3'},{name:'Eclesiastes byblia cantada com',file:'21_Eclesiastes_byblia_cantada_com.mp3'},{name:'Eclesiastes Completo',file:'21_Eclesiastes_Completo.mp3'}]},
-  {n:22,name:'Canticos'},
-  {n:23,name:'Isaias'},
-  {n:24,name:'Jeremias'},
-  {n:25,name:'Lamentacoes'},
-  {n:26,name:'Ezequiel'},
-  {n:27,name:'Daniel',files:[{name:'Daniel',file:'27_Daniel.mp3'}]},
-  {n:28,name:'Oseias'},
-  {n:29,name:'Joel'},
-  {n:30,name:'Amos'},
-  {n:31,name:'Obadias'},
-  {n:32,name:'Jonas',files:[{name:'Jonas',file:'32_Jonas.mp3'},{name:'Jonas bblia cantada louvor',file:'32_Jonas_bblia_cantada_louvor.mp3'},{name:'Jonas byblia cantada louvo',file:'32_Jonas_byblia_cantada_louvo.mp3'}]},
-  {n:33,name:'Miqueias'},
-  {n:34,name:'Naum'},
-  {n:35,name:'Habacuque'},
-  {n:36,name:'Sofonias'},
-  {n:37,name:'Ageu'},
-  {n:38,name:'Zacarias'},
-  {n:39,name:'Malaquias'},
-  {n:40,name:'Mateus',files:[{name:'Mateus Parte2',file:'40_Mateus_Parte2.mp3'}]},
-  {n:41,name:'Marcos',files:[{name:'Marcos',file:'41_Marcos.mp3'},{name:'Marcos evangelho de  bblia ',file:'41_Marcos_evangelho_de__bblia_.mp3'},{name:'Marcos evangelho de  byblia',file:'41_Marcos_evangelho_de__byblia.mp3'},{name:'Marcos Parte1',file:'41_Marcos_Parte1.mp3'}]},
-  {n:42,name:'Lucas',files:[{name:'Lucas',file:'42_Lucas.mp3'},{name:'Lucas 1324 bblia cantada c',file:'42_Lucas_1324_bblia_cantada_c.mp3'},{name:'Lucas 1324 byblia cantada ',file:'42_Lucas_1324_byblia_cantada_.mp3'},{name:'Lucas Parte2',file:'42_Lucas_Parte2.mp3'}]},
-  {n:43,name:'Joao',files:[{name:'Joao Parte1',file:'43_Joao_Parte1.mp3'},{name:'Joao Parte2',file:'43_Joao_Parte2.mp3'}]},
-  {n:44,name:'Atos',files:[{name:'Atos Parte1',file:'44_Atos_Parte1.mp3'},{name:'Atos Parte2',file:'44_Atos_Parte2.mp3'},{name:'Atos Parte3',file:'44_Atos_Parte3.mp3'}]},
-  {n:45,name:'Romanos',files:[{name:'Romanos',file:'45_Romanos.mp3'},{name:'Romanos bblia cantada msicas',file:'45_Romanos_bblia_cantada_msicas.mp3'},{name:'Romanos byblia cantada msica',file:'45_Romanos_byblia_cantada_msica.mp3'},{name:'Romanos carta aos  bblia can',file:'45_Romanos_carta_aos__bblia_can.mp3'},{name:'Romanos carta aos  bblia can v2',file:'45_Romanos_carta_aos__bblia_can_v2.mp3'},{name:'Romanos carta aos  byblia ca',file:'45_Romanos_carta_aos__byblia_ca.mp3'},{name:'Romanos carta aos  byblia ca v2',file:'45_Romanos_carta_aos__byblia_ca_v2.mp3'},{name:'Romanos Musicas',file:'45_Romanos_Musicas.mp3'}]},
-  {n:46,name:'1 Corintios',files:[{name:'1Corintios',file:'46_1Corintios.mp3'}]},
-  {n:47,name:'2 Corintios',files:[{name:'2Corintios',file:'47_2Corintios.mp3'}]},
-  {n:48,name:'Galatas',files:[{name:'Galatas',file:'48_Galatas.mp3'}]},
-  {n:49,name:'Efesios',files:[{name:'Efesios',file:'49_Efesios.mp3'}]},
-  {n:50,name:'Filipenses',files:[{name:'Filipenses',file:'50_Filipenses.mp3'},{name:'Filipenses Acalmar',file:'50_Filipenses_Acalmar.mp3'},{name:'Filipenses carta aos  bblia can',file:'50_Filipenses_carta_aos__bblia_can.mp3'},{name:'Filipenses carta aos  bblia can v2',file:'50_Filipenses_carta_aos__bblia_can_v2.mp3'},{name:'Filipenses carta aos  byblia ca',file:'50_Filipenses_carta_aos__byblia_ca.mp3'},{name:'Filipenses carta aos  byblia ca v2',file:'50_Filipenses_carta_aos__byblia_ca_v2.mp3'},{name:'Filipenses Completo',file:'50_Filipenses_Completo.mp3'}]},
-  {n:51,name:'Colossenses',files:[{name:'Colossenses',file:'51_Colossenses.mp3'},{name:'Colossenses 20min',file:'51_Colossenses_20min.mp3'},{name:'Colossenses a palavra viva em',file:'51_Colossenses_a_palavra_viva_em.mp3'},{name:'Colossenses Adoracao',file:'51_Colossenses_Adoracao.mp3'},{name:'Colossenses Cap1',file:'51_Colossenses_Cap1.mp3'},{name:'Colossenses Cap1-4',file:'51_Colossenses_Cap1-4.mp3'},{name:'Colossenses carta aos  bblia ca',file:'51_Colossenses_carta_aos__bblia_ca.mp3'},{name:'Colossenses carta aos  byblia c',file:'51_Colossenses_carta_aos__byblia_c.mp3'},{name:'Colossenses Single',file:'51_Colossenses_Single.mp3'},{name:'Colossenses u a palavra viva e',file:'51_Colossenses_u_a_palavra_viva_e.mp3'}]},
-  {n:52,name:'1 Tessalonicenses',files:[{name:'1Tessalonicenses',file:'52_1Tessalonicenses.mp3'}]},
-  {n:53,name:'2 Tessalonicenses',files:[{name:'2Tessalonicenses',file:'53_2Tessalonicenses.mp3'}]},
-  {n:54,name:'1 Timoteo',files:[{name:'1Timoteo',file:'54_1Timoteo.mp3'}]},
-  {n:55,name:'2 Timoteo',files:[{name:'2Timoteo',file:'55_2Timoteo.mp3'}]},
-  {n:56,name:'Tito',files:[{name:'Tito',file:'56_Tito.mp3'},{name:'Tito carta a  bblia canta',file:'56_Tito_carta_a__bblia_canta.mp3'},{name:'Tito carta a  byblia cant',file:'56_Tito_carta_a__byblia_cant.mp3'}]},
-  {n:57,name:'Filemom',files:[{name:'Filemom',file:'57_Filemom.mp3'},{name:'Filemom carta a  bblia canta',file:'57_Filemom_carta_a__bblia_canta.mp3'},{name:'Filemom carta a  byblia cant',file:'57_Filemom_carta_a__byblia_cant.mp3'}]},
-  {n:58,name:'Hebreus',files:[{name:'Hebreus',file:'58_Hebreus.mp3'},{name:'Hebreus bblia cantada louvor',file:'58_Hebreus_bblia_cantada_louvor.mp3'},{name:'Hebreus byblia cantada louvo',file:'58_Hebreus_byblia_cantada_louvo.mp3'}]},
-  {n:59,name:'Tiago',files:[{name:'Tiago',file:'59_Tiago.mp3'},{name:'Tiago carta de  bblia cant',file:'59_Tiago_carta_de__bblia_cant.mp3'},{name:'Tiago carta de  byblia can',file:'59_Tiago_carta_de__byblia_can.mp3'}]},
-  {n:60,name:'1 Pedro',files:[{name:'1Pedro',file:'60_1Pedro.mp3'}]},
-  {n:61,name:'2 Pedro',files:[{name:'2Pedro',file:'61_2Pedro.mp3'}]},
-  {n:62,name:'1 Joao',files:[{name:'1Joao',file:'62_1Joao.mp3'}]},
-  {n:63,name:'2 Joao',files:[{name:'2Joao',file:'63_2Joao.mp3'}]},
-  {n:64,name:'3 Joao',files:[{name:'3Joao',file:'64_3Joao.mp3'}]},
-  {n:65,name:'Judas',files:[{name:'Judas',file:'65_Judas.mp3'},{name:'Judas bblia cantada louvor',file:'65_Judas_bblia_cantada_louvor.mp3'},{name:'Judas byblia cantada louvo',file:'65_Judas_byblia_cantada_louvo.mp3'}]},
-  {n:66,name:'Apocalipse',files:[{name:'Apocalipse',file:'66_Apocalipse.mp3'},{name:'Apocalipse 1 bblia cantada por',file:'66_Apocalipse_1_bblia_cantada_por.mp3'},{name:'Apocalipse 1 u byblia cantada',file:'66_Apocalipse_1_u_byblia_cantada.mp3'},{name:'Apocalipse 2 cartas os igrejas',file:'66_Apocalipse_2_cartas_os_igrejas.mp3'},{name:'Apocalipse 2 cartas s igrejas',file:'66_Apocalipse_2_cartas_s_igrejas.mp3'},{name:'Apocalipse bblia cantada louvo',file:'66_Apocalipse_bblia_cantada_louvo.mp3'},{name:'Apocalipse byblia cantada louv',file:'66_Apocalipse_byblia_cantada_louv.mp3'},{name:'Apocalipse em louvores bemaven',file:'66_Apocalipse_em_louvores_bemaven.mp3'},{name:'Apocalipse olhos como chama de ',file:'66_Apocalipse_olhos_como_chama_de_.mp3'},{name:'Apocalipse Parte1',file:'66_Apocalipse_Parte1.mp3'},{name:'Apocalipse Parte2',file:'66_Apocalipse_Parte2.mp3'},{name:'Apocalipse Parte3',file:'66_Apocalipse_Parte3.mp3'},{name:'Apocalipse volte ao primeiro am',file:'66_Apocalipse_volte_ao_primeiro_am.mp3'}]},
+        const driveMapping = {
+            "02_Exodo_01": "1hDRy0Rq8hpx9_3sCgPoc90iTcMxtoMFZ",
+            "02_Exodo_02": "17aTDDHjLZ171Pod4XKXVUlsfzcTid9bt",
+            "02_Exodo_03": "1zrHYCM_btS93VDgbW2K5wUg3L-K6HeTO",
+            "02_Exodo_04": "1MvnzhxRa7xDF9UZ_oylMR9qykQnFARzw",
+            "02_Exodo_05": "1ijDxgj54ByKn5b8lCxC4X5bxeg85RRV8",
+            "02_Exodo_06": "1IYk8aiC2c66QVAWMfuPcNAoT-vkDq6VA",
+            "02_Exodo_07": "1UQVYzmqBVKSeFlO0tVu70RlPLT85F7NX",
+            "02_Exodo_08": "1McgLXr7lnq2fEF9JDD9rzGLsrNERboa1",
+            "02_Exodo_09": "1a1082wX8BwRhW6obIzsuJq_-tnQJxGm-",
+            "02_Exodo_10": "1GvEr00w_07_Ay-cyPlA8Xi5H8JREc51N",
+            "02_Exodo_11": "1zvqCFDOtafyH2e1ft-B0UnAZ33GNbv4Z",
+            "02_Exodo_12": "1UyYjwe_NG86eTqBgNqAtWHLu4iVyUVth",
+            "02_Exodo_13": "1J1tIty9agofdYrQ9kJ7rdFhuIT1w7Rk7",
+            "02_Exodo_14": "1lkPIZ7PN4eUfX2MUSXZFPCYb3J9m2MnD",
+            "02_Exodo_15": "1z5skPdUf_tf_D9YbcGqr64LL2MgSpE8S",
+            "02_Exodo_16": "1jOfm8CqwoHfggHpk8bX29pRI6C9B58iB",
+            "02_Exodo_17": "1wHRQrKrKIGcF3zNNVkvUVqPrc62shNLU",
+            "02_Exodo_18": "13ZxPnKhPRMXpA82sZm5X27hTwzRzw2eO",
+            "02_Exodo_19": "1lVYKTkBYmTHKllDkZpAagz7boIiV1xfV",
+            "02_Exodo_20": "1BEezQozbLU-bI9bRjgG0iBFrpB3P_bBU",
+            "02_Exodo_21": "18IIuq56z0jC9067e4GcO5d7UacRu8Vvh",
+            "02_Exodo_22": "1FHLHJrSXrkZrkam3MIuoOsa0faGp-xv5",
+            "02_Exodo_23": "1Es5BD_KOBS3anjTUq71OPzns74pk94Np",
+            "02_Exodo_24": "19DPmd44ZwbCO9mt2XFlA0wQ3H0uiX56B",
+            "02_Exodo_25": "1mHpGU2G1qSwoT4LKOXfEPvmKlvg2ZwtY",
+            "02_Exodo_26": "1HG7Df0MCmoglAKHi7Rvv3aczaou9ozRX",
+            "02_Exodo_27": "1FJs9Q7D0UTeaI9L0nP3idAIJl37IUekz",
+            "02_Exodo_28": "1gz5QTcsxR4bkr9Ni2H_smpivhC8QXGzg",
+            "02_Exodo_29": "133_qogx_-TNa4WG7FwjJbOPSQZdkFatP",
+            "02_Exodo_30": "1mh5SoIz1FnMlcU6ZIr9dkJFatnrjOxe2",
+            "02_Exodo_31": "1VzpprHHReCOMBAFVGsBy-Ykqh77aXXJs",
+            "02_Exodo_32": "1oAvfpK5dLfpmSAN4N82RULLRzPc0w_Y_",
+            "02_Exodo_33": "1pnPBrNfMhvaemU--vY52QWtilRHt530m",
+            "02_Exodo_34": "1JW9GP0_YF7m2ovxjuz-qtWx7n_6NxZIH",
+            "02_Exodo_35": "11CMil0Tf7JM4ULZ2qViTZJSuPpw-aUNF",
+            "02_Exodo_36": "1vjjRgOOj7ASfWXMv64Qp1HNnc0o6rYrd",
+            "02_Exodo_37": "15a_FiDLzpYZwQXfhCW2Zdn1Xz9xp43P_",
+            "02_Exodo_38": "1kyH5JHbhV1DVPfyXMHAIsCgm0U_mN0Ks",
+            "02_Exodo_39": "1Vblq84SMcyiMigpZac1MKbjNJolZELMB",
+            "02_Exodo_40": "1BBK1N57eCiASB5lWxOLcBd8vs28LdUu8"
+        };
+
+        const fileNames = {
+            "01": "Genesis",
+            "02": "Exodo",
+            "03": "Levitico",
+            "04": "Numeros",
+            "05": "Deuteronomio",
+            "06": "Josue",
+            "19": "Salmos"
+        };
+        const books = [
+            { num: "01", name: "Genesis", chapters: 50, available: false },
+            { num: "02", name: "Exodo", chapters: 40, available: true },
+            { num: "03", name: "Levitico", chapters: 27, available: false },
+            { num: "04", name: "Numeros", chapters: 36, available: false },
+            { num: "05", name: "Deuteronomio", chapters: 34, available: false },
+            { num: "06", name: "Josue", chapters: 24, available: false },
+            { num: "07", name: "Juizes", chapters: 21, available: false },
+            { num: "08", name: "Rute", chapters: 4, available: false },
+            { num: "09", name: "1 Samuel", chapters: 31, available: false },
+            { num: "10", name: "2 Samuel", chapters: 24, available: false },
+            { num: "11", name: "1 Reis", chapters: 22, available: false },
+            { num: "12", name: "2 Reis", chapters: 25, available: false },
+            { num: "13", name: "1 Cronicas", chapters: 29, available: false },
+            { num: "14", name: "2 Cronicas", chapters: 36, available: false },
+            { num: "15", name: "Esdras", chapters: 10, available: false },
+            { num: "16", name: "Neemias", chapters: 13, available: false },
+            { num: "17", name: "Ester", chapters: 10, available: false },
+            { num: "18", name: "Jo", chapters: 42, available: false },
+            { num: "19", name: "Salmos", chapters: 150, available: false },
+            { num: "20", name: "Proverbios", chapters: 31, available: false },
+            { num: "21", name: "Eclesiastes", chapters: 12, available: false },
+            { num: "22", name: "Canticos", chapters: 8, available: false },
+            { num: "23", name: "Isaias", chapters: 66, available: false },
+            { num: "24", name: "Jeremias", chapters: 52, available: false },
+            { num: "25", name: "Lamentacoes", chapters: 5, available: false },
+            { num: "26", name: "Ezequiel", chapters: 48, available: false },
+            { num: "27", name: "Daniel", chapters: 12, available: false },
+            { num: "28", name: "Oseias", chapters: 14, available: false },
+            { num: "29", name: "Joel", chapters: 3, available: false },
+            { num: "30", name: "Amos", chapters: 9, available: false },
+            { num: "31", name: "Obadias", chapters: 1, available: false },
+            { num: "32", name: "Jonas", chapters: 4, available: false },
+            { num: "33", name: "Miqueias", chapters: 7, available: false },
+            { num: "34", name: "Naum", chapters: 3, available: false },
+            { num: "35", name: "Habacuque", chapters: 3, available: false },
+            { num: "36", name: "Sofonias", chapters: 3, available: false },
+            { num: "37", name: "Ageu", chapters: 2, available: false },
+            { num: "38", name: "Zacarias", chapters: 14, available: false },
+            { num: "39", name: "Malaquias", chapters: 4, available: false },
+            { num: "40", name: "Mateus", chapters: 28, available: false },
+            { num: "41", name: "Marcos", chapters: 16, available: false },
+            { num: "42", name: "Lucas", chapters: 24, available: false },
+            { num: "43", name: "Joao", chapters: 21, available: false },
+            { num: "44", name: "Atos", chapters: 28, available: false },
+            { num: "45", name: "Romanos", chapters: 16, available: false },
+            { num: "46", name: "1 Corintios", chapters: 16, available: false },
+            { num: "47", name: "2 Corintios", chapters: 13, available: false },
+            { num: "48", name: "Galatas", chapters: 6, available: false },
+            { num: "49", name: "Efesios", chapters: 6, available: false },
+            { num: "50", name: "Filipenses", chapters: 4, available: false },
+            { num: "51", name: "Colossenses", chapters: 4, available: false },
+            { num: "52", name: "1 Tessalonicenses", chapters: 5, available: false },
+            { num: "53", name: "2 Tessalonicenses", chapters: 3, available: false },
+            { num: "54", name: "1 Timoteo", chapters: 6, available: false },
+            { num: "55", name: "2 Timoteo", chapters: 4, available: false },
+            { num: "56", name: "Tito", chapters: 3, available: false },
+            { num: "57", name: "Filemom", chapters: 1, available: false },
+            { num: "58", name: "Hebreus", chapters: 13, available: false },
+            { num: "59", name: "Tiago", chapters: 5, available: false },
+            { num: "60", name: "1 Pedro", chapters: 5, available: false },
+            { num: "61", name: "2 Pedro", chapters: 3, available: false },
+            { num: "62", name: "1 Joao", chapters: 5, available: false },
+            { num: "63", name: "2 Joao", chapters: 1, available: false },
+            { num: "64", name: "3 Joao", chapters: 1, available: false },
+            { num: "65", name: "Judas", chapters: 1, available: false },
+            { num: "66", name: "Apocalipse", chapters: 22, available: false }
         ];
-
-        function init() {
-            const container = document.getElementById('books');
-            BOOKS.forEach(book => {
-                const div = document.createElement('div');
-                div.className = 'book ' + (book.files ? 'available' : 'unavailable');
-                div.innerHTML = '<div class="book-num">' + book.n + '</div><div class="book-name">' + book.name + '</div>';
-                if (book.files) {
-                    div.onclick = () => book.files.length === 1 ? play(book.name, book.files[0]) : showModal(book);
-                }
-                container.appendChild(div);
-            });
+        const oldTestament = books.filter(b => parseInt(b.num) <= 39);
+        const newTestament = books.filter(b => parseInt(b.num) > 39);
+        let currentBook = null;
+        let currentChapter = 1;
+        
+        function renderBooks(container, bookList) {
+            const el = document.getElementById(container);
+            el.innerHTML = bookList.map(book => 
+                '<div class="book'+(book.available ? '' : ' unavailable')+'" data-num="'+book.num+'" data-chapters="'+book.chapters+'" data-available="'+book.available+'">' +
+                '<div class="book-num">'+book.num+'</div>' +
+                '<div class="book-name">'+book.name+'</div></div>'
+            ).join('');
         }
-
-        function play(name, file) {
-            document.getElementById('player').style.display = 'block';
-            document.getElementById('player-title').textContent = name + ' - ' + file.name;
-            const audio = document.getElementById('audio');
-            audio.src = ARCHIVE_URL + file.file;
-            audio.play();
-            closeModal();
+        
+        function playBook(num, chapters) {
+            currentBook = num;
+            currentChapter = 1;
+            document.querySelectorAll('.book').forEach(b => b.classList.remove('playing'));
+            document.querySelector('.book[data-num="'+num+'"]').classList.add('playing');
+            const select = document.getElementById('chapter-select');
+            select.innerHTML = '';
+            for (let i = 1; i <= chapters; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = 'Capitulo ' + i;
+                select.appendChild(opt);
+            }
+            document.getElementById('player').classList.add('active');
+            playChapter(1);
         }
-
-        function showModal(book) {
-            document.getElementById('modal-title').textContent = book.name;
-            const container = document.getElementById('modal-files');
-            container.innerHTML = '';
-            book.files.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'modal-file';
-                div.textContent = file.name;
-                div.onclick = () => play(book.name, file);
-                container.appendChild(div);
-            });
-            document.getElementById('modal').classList.add('active');
+        
+        function playChapter(chapter) {
+            currentChapter = chapter;
+            const fileName = fileNames[currentBook];
+            const padLength = (currentBook === "19") ? 3 : 2;
+            const chapterNum = String(chapter).padStart(padLength, '0');
+            const key = currentBook + "_" + fileName + "_" + chapterNum;
+            const fileId = driveMapping[key];
+            if (fileId) {
+                const url = "https://drive.google.com/uc?export=download&id=" + fileId;
+                const audio = document.getElementById('audio');
+                audio.src = url;
+                audio.play();
+            } else {
+                console.error("File not found:", key);
+            }
+            const book = books.find(b => b.num === currentBook);
+            document.getElementById('player-title').textContent = book.name + ' - Capitulo ' + chapter;
+            document.getElementById('chapter-select').value = chapter;
+            document.getElementById('prev-btn').disabled = chapter <= 1;
+            document.getElementById('next-btn').disabled = chapter >= book.chapters;
         }
-
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
-
-        document.getElementById('modal').onclick = e => { if(e.target.id === 'modal') closeModal(); };
-        init();
+        
+        document.addEventListener('click', e => {
+            const book = e.target.closest('.book');
+            if (book && book.dataset.available === 'true') {
+                playBook(book.dataset.num, parseInt(book.dataset.chapters));
+            }
+        });
+        document.getElementById('chapter-select').addEventListener('change', e => {
+            playChapter(parseInt(e.target.value));
+        });
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentChapter > 1) playChapter(currentChapter - 1);
+        });
+        document.getElementById('next-btn').addEventListener('click', () => {
+            const book = books.find(b => b.num === currentBook);
+            if (currentChapter < book.chapters) playChapter(currentChapter + 1);
+        });
+        document.getElementById('audio').addEventListener('ended', () => {
+            const book = books.find(b => b.num === currentBook);
+            if (currentChapter < book.chapters) playChapter(currentChapter + 1);
+        });
+        
+        renderBooks('old-testament', oldTestament);
+        renderBooks('new-testament', newTestament);
     </script>
 </body>
 </html>
