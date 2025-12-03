@@ -149,7 +149,7 @@ Minha força vem de Ti,
 Mesmo quando os dias são escuros
 Tua luz brilha sobre mim.
 Eu confiarei, eu não temerei,
-Pois sei em Quem eu criei,
+Pois sei em Quem eu cri,
 Esperarei no Senhor
 E minha força renovarei.
 
@@ -164,6 +164,7 @@ Espero em Ti, Senhor.
 
 [STYLE]
 Brazilian worship with soft rock influence, acoustic guitar and electric ambient lines, steady drums, no choir, tempo 84 BPM, atmosphere of courage and faith.
+
 
 === Salmo 30 ===
 [LYRICS]
@@ -257,8 +258,8 @@ Salmo 37 – Descansa no Senhor
 [Verso 1 – Voz feminina]
 Não te indignes contra o mal,
 Nem invejes quem faz injustiça,
-Como a relva logo secarão,
-Mas quem confia floresça.
+Como a relva logo secará,
+Mas quem confia floresce.
 Entrega teu caminho ao Senhor,
 N’Ele confia e o mais Ele fará,
 Teu direito brilhará como o sol,
@@ -292,6 +293,7 @@ Os justos herdarão a terra.
 
 [STYLE]
 Brazilian contemplative worship, calm and steadfast, piano soft, nylon-string guitar, very light pads, no drums, tempo 74 BPM, trusting atmosphere.
+
 
 === Salmo 42 ===
 [LYRICS]
