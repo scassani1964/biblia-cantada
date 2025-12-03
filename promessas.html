@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promessas da B&iacute;blia em M&uacute;sica</title>
+    <title>Promessas da Bíblia em Música</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="promessas-lyrics.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Merriweather', Georgia, serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0f1628 0%, #1a1f3a 50%, #0a0d1a 100%);
             min-height: 100vh;
-            color: #fff;
+            color: #e2e8f0;
         }
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
         
         header {
             text-align: center;
             padding: 40px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             margin-bottom: 40px;
         }
         h1 {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 2.5em;
-            color: #e94560;
+            color: #d4af37;
             margin-bottom: 15px;
         }
         .subtitle {
-            color: #aaa;
+            color: #94a3b8;
             font-size: 1.1em;
             font-style: italic;
         }
@@ -42,22 +43,22 @@
         }
         
         .theme-card {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(233, 69, 96, 0.3);
+            background: rgba(212, 175, 55, 0.08);
+            border: 2px solid rgba(212, 175, 55, 0.3);
             border-radius: 15px;
             padding: 25px;
             cursor: pointer;
             transition: all 0.3s;
         }
         .theme-card:hover {
-            background: rgba(233, 69, 96, 0.15);
-            border-color: #e94560;
+            background: rgba(212, 175, 55, 0.18);
+            border-color: #d4af37;
             transform: translateY(-3px);
         }
         .theme-card.active {
-            background: rgba(233, 69, 96, 0.25);
-            border-color: #e94560;
-            box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+            background: rgba(212, 175, 55, 0.25);
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
         
         .theme-icon {
@@ -67,19 +68,19 @@
         .theme-name {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.4em;
-            color: #e94560;
+            color: #d4af37;
             margin-bottom: 10px;
         }
         .theme-description {
-            color: #aaa;
+            color: #94a3b8;
             font-size: 0.95em;
             line-height: 1.5;
         }
         .theme-psalms {
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #888;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: #64748b;
             font-size: 0.9em;
         }
         
@@ -87,6 +88,7 @@
         .player-section {
             display: none;
             background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 40px;
@@ -98,12 +100,12 @@
         .player-theme {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.8em;
-            color: #e94560;
+            color: #d4af37;
             margin-bottom: 10px;
         }
         .player-psalm {
             font-size: 1.2em;
-            color: #fff;
+            color: #f8fafc;
             margin-bottom: 20px;
         }
         
@@ -115,9 +117,9 @@
             margin-bottom: 20px;
         }
         .psalm-btn {
-            background: rgba(233, 69, 96, 0.3);
-            border: 2px solid #e94560;
-            color: #fff;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            color: #f8fafc;
             padding: 10px 20px;
             border-radius: 25px;
             cursor: pointer;
@@ -126,11 +128,14 @@
             transition: all 0.3s;
         }
         .psalm-btn:hover {
-            background: #e94560;
+            background: rgba(212, 175, 55, 0.4);
+            border-color: #d4af37;
         }
         .psalm-btn.playing {
-            background: #e94560;
-            box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+            background: linear-gradient(135deg, #d4af37, #b8960c);
+            color: #0f172a;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
         
         .audio-container {
@@ -141,32 +146,83 @@
             max-width: 500px;
         }
         
-        .close-player {
+        .player-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
             margin-top: 20px;
+        }
+        .close-player, .lyrics-btn {
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #aaa;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #94a3b8;
             padding: 8px 20px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.9em;
+            transition: all 0.3s;
         }
-        .close-player:hover {
-            border-color: #fff;
-            color: #fff;
+        .close-player:hover, .lyrics-btn:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+        .lyrics-btn.active {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+        
+        /* Paroles */
+        .lyrics-container {
+            display: none;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .lyrics-container.active {
+            display: block;
+        }
+        .lyrics-container::-webkit-scrollbar { width: 8px; }
+        .lyrics-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+        .lyrics-container::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 4px; }
+        .lyrics-text {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+        }
+        .lyrics-text .section-label {
+            color: #d4af37;
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+        }
+        .no-lyrics {
+            color: #64748b;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
         }
         
         /* Footer */
         footer {
             text-align: center;
             padding: 30px 0;
-            color: #666;
+            color: #64748b;
             font-size: 0.85em;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
         footer a {
-            color: #e94560;
+            color: #d4af37;
             text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
         
         /* Mobile */
@@ -183,7 +239,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Promessas da B&iacute;blia em M&uacute;sica</h1>
+            <h1>Promessas da Bíblia em Música</h1>
             <p class="subtitle">Encontre paz nos Salmos conforme sua necessidade</p>
         </header>
         
@@ -194,14 +250,20 @@
             <div class="audio-container">
                 <audio id="audio" controls></audio>
             </div>
-            <button class="close-player" onclick="closePlayer()">Fechar</button>
+            <div class="player-actions">
+                <button class="lyrics-btn" id="lyrics-btn" onclick="toggleLyrics()">📜 Letras</button>
+                <button class="close-player" onclick="closePlayer()">Fechar</button>
+            </div>
+            <div class="lyrics-container" id="lyrics-container">
+                <div class="lyrics-text" id="lyrics-text"></div>
+            </div>
         </div>
         
         <div class="themes-grid" id="themes-grid"></div>
         
         <footer>
-            <p>2025 B&iacute;blia Cantada - St&eacute;phane Cassani</p>
-            <p><a href="index.html">Voltar para a B&iacute;blia Cantada</a></p>
+            <p>© 2025 Bíblia Cantada - Stéphane Cassani</p>
+            <p><a href="index.html">Voltar para a Bíblia Cantada</a></p>
         </footer>
     </div>
     
@@ -213,48 +275,48 @@
                 id: 'ansiedade',
                 icon: '😰',
                 name: 'Ansiedade / Medo',
-                description: 'Quando a preocupa&ccedil;&atilde;o te sufoca, encontre descanso na presen&ccedil;a de Deus.',
+                description: 'Quando a preocupação te sufoca, encontre descanso na presença de Deus.',
                 psalms: [23, 27, 46, 91]
             },
             {
                 id: 'paz',
                 icon: '🕊️',
                 name: 'Paz',
-                description: 'A paz que excede todo entendimento, aquela que o mundo n&atilde;o pode dar.',
+                description: 'A paz que excede todo entendimento, aquela que o mundo não pode dar.',
                 psalms: [4, 23, 37, 131]
             },
             {
                 id: 'louvor',
                 icon: '🙌',
                 name: 'Louvor / Alegria',
-                description: 'Quando seu cora&ccedil;&atilde;o transborda de gratid&atilde;o e quer celebrar o Senhor.',
+                description: 'Quando seu coração transborda de gratidão e quer celebrar o Senhor.',
                 psalms: [100, 145, 148, 150]
             },
             {
                 id: 'protecao',
                 icon: '🛡️',
-                name: 'Prote&ccedil;&atilde;o',
-                description: 'O Senhor &eacute; o seu ref&uacute;gio, sua fortaleza, seu escudo.',
+                name: 'Proteção',
+                description: 'O Senhor é o seu refúgio, sua fortaleza, seu escudo.',
                 psalms: [91, 121, 125]
             },
             {
                 id: 'tristeza',
                 icon: '😢',
                 name: 'Tristeza / Desânimo',
-                description: 'No vale da sombra, Ele est&aacute; com voc&ecirc;.',
+                description: 'No vale da sombra, Ele está com você.',
                 psalms: [34, 42, 130]
             },
             {
                 id: 'forca',
                 icon: '💪',
-                name: 'For&ccedil;a / Coragem',
-                description: 'Quando voc&ecirc; precisa renovar suas for&ccedil;as e coragem.',
+                name: 'Força / Coragem',
+                description: 'Quando você precisa renovar suas forças e coragem.',
                 psalms: [18, 27, 46, 144]
             },
             {
                 id: 'confianca',
                 icon: '🙏',
-                name: 'Confian&ccedil;a',
+                name: 'Confiança',
                 description: 'Entregue seu caminho ao Senhor, confie Nele.',
                 psalms: [23, 37, 62, 91]
             },
@@ -262,13 +324,14 @@
                 id: 'cura',
                 icon: '💚',
                 name: 'Cura',
-                description: 'Aquele que sara todas as suas doen&ccedil;as, que redime a sua vida.',
+                description: 'Aquele que sara todas as suas doenças, que redime a sua vida.',
                 psalms: [30, 103, 147]
             }
         ];
         
         let currentTheme = null;
         let currentPsalm = null;
+        let lyricsVisible = false;
         
         function renderThemes() {
             const grid = document.getElementById('themes-grid');
@@ -288,19 +351,16 @@
             
             currentTheme = theme;
             
-            // Update active state
             document.querySelectorAll('.theme-card').forEach(card => {
                 card.classList.toggle('active', card.dataset.id === themeId);
             });
             
-            // Show player
             const playerSection = document.getElementById('player-section');
             playerSection.classList.add('active');
             
             document.getElementById('player-theme').innerHTML = theme.icon + ' ' + theme.name;
             document.getElementById('player-psalm').textContent = 'Escolha um Salmo';
             
-            // Render psalm buttons
             const buttonsContainer = document.getElementById('psalm-buttons');
             buttonsContainer.innerHTML = theme.psalms.map(psalm => `
                 <button class="psalm-btn" data-psalm="${psalm}" onclick="playPsalm(${psalm})">
@@ -308,29 +368,59 @@
                 </button>
             `).join('');
             
-            // Scroll to player
+            // Reset lyrics
+            lyricsVisible = false;
+            document.getElementById('lyrics-container').classList.remove('active');
+            document.getElementById('lyrics-btn').classList.remove('active');
+            
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         
         function playPsalm(psalmNum) {
             currentPsalm = psalmNum;
             
-            // Update button states
             document.querySelectorAll('.psalm-btn').forEach(btn => {
                 btn.classList.toggle('playing', parseInt(btn.dataset.psalm) === psalmNum);
             });
             
-            // Update title
             document.getElementById('player-psalm').textContent = 'Salmo ' + psalmNum;
             
-            // Build URL - Salmos are book 19
             const chapterPadded = String(psalmNum).padStart(3, '0');
             const url = ARCHIVE_BASE + '/19_Salmos_' + chapterPadded + '.mp3';
             
-            // Play audio
             const audio = document.getElementById('audio');
             audio.src = url;
-            // audio.play(); // Removed autoplay - user clicks play
+            
+            // Update lyrics if visible
+            if (lyricsVisible) {
+                updateLyrics();
+            }
+        }
+        
+        function toggleLyrics() {
+            lyricsVisible = !lyricsVisible;
+            document.getElementById('lyrics-container').classList.toggle('active', lyricsVisible);
+            document.getElementById('lyrics-btn').classList.toggle('active', lyricsVisible);
+            if (lyricsVisible) {
+                updateLyrics();
+            }
+        }
+        
+        function updateLyrics() {
+            const lyricsText = document.getElementById('lyrics-text');
+            if (!currentPsalm) {
+                lyricsText.innerHTML = '<div class="no-lyrics">Escolha um Salmo primeiro</div>';
+                return;
+            }
+            
+            if (typeof psalmLyrics !== 'undefined' && psalmLyrics[currentPsalm]) {
+                let lyrics = psalmLyrics[currentPsalm];
+                let formatted = lyrics.replace(/\[([^\]]+)\]/g, '<span class="section-label">[$1]</span>');
+                formatted = formatted.replace(/\n/g, '<br>');
+                lyricsText.innerHTML = formatted;
+            } else {
+                lyricsText.innerHTML = '<div class="no-lyrics">Letras não disponíveis para este Salmo</div>';
+            }
         }
         
         function closePlayer() {
@@ -341,14 +431,10 @@
             });
             currentTheme = null;
             currentPsalm = null;
+            lyricsVisible = false;
         }
         
-        // Initialize
         renderThemes();
     </script>
 </body>
 </html>
-
-
-
-
